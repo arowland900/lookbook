@@ -11,7 +11,7 @@ const HomePage = (props) => {
       />
       <div className="flex-h align-flex-end">
        This is the Home Page!! WOO!
-
+    
       </div>
     </div>
   );

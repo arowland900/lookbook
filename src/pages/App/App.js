@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import HomePage from '../../pages/HomePage/HomePage';
 
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
-import tokenService from '../../utils/tokenService';
 
 
 
@@ -28,7 +27,7 @@ class App extends Component {
   
 
 
-  handleLogout = () => {
+  handleLogout = () => {  
     userService.logout();
     this.setState({ user: null });
   }
@@ -40,14 +39,14 @@ class App extends Component {
 
 
   render() {
-    let winTries = this.getWinTries();
     return (
       <div>
         <header className='header-footer'>L O O K &nbsp;&nbsp;&nbsp;  B O O K</header>
         <Switch>
           <Route exact path='/' render={() =>
             <HomePage
-       
+              user={this.state.user}
+              handleLogout={this.handleLogout}
             />
           }/>
    
