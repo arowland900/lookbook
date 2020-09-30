@@ -90,6 +90,7 @@ async function addPhoto(req, res) {
 }
 
 async function create(req, res) {
+
 	req.body.user = req.user._id
 	const item = await Item.create(req.body);
 	res.status(201).json(item);
@@ -98,6 +99,6 @@ async function create(req, res) {
 async function index(req, res) {
 	console.log("REQ USER: ", req.user)
 	const items = await Item.find({user: req.user._id});
-	console.log("DA ITEMS: ", items)
+	// console.log("DA ITEMS: ", items)
 	res.status(200).json(items);
 }

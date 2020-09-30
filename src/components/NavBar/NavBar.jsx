@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './NavBar.css';
 
 const NavBar = (props) => {
-    console.log(props.user)
+    // console.log(props.user)
   let nav = props.user ?
     <div>
       <span className='NavBar-welcome'>Welcome {props.user.name}!</span>
@@ -13,17 +13,20 @@ const NavBar = (props) => {
       <Link to='/items' className='NavBar-link'>My Items</Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <Link to='/new' className='NavBar-link'>New Item :)</Link>
+      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <Link to='/' className='NavBar-link'>Home</Link>
     </div>
     :
     <div>
       <Link to='/login' className='NavBar-link'>Log In</Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <Link to='/signup' className='NavBar-link'>Sign Up</Link>
-    </div>;
+    </div>
 
   return (
     <div className='NavBar'>
       {nav}
+      
     </div>
   );
 };

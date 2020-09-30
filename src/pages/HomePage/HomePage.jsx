@@ -6,7 +6,7 @@ import './HomePage.css';
 class HomePage extends Component {
 
 	render() {
-		console.log("HOME PAGE USER: ", this.props.user)
+		// console.log("HOME PAGE USER: ", this.props.user)
 		return (
 			<div className="GamePage">
 				{/* <NavBar

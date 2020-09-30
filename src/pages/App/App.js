@@ -51,27 +51,34 @@ class App extends Component {
 	handleLogout = async () => {
 		console.log("LOGGING OUT")
 		await userService.logout();
-		this.setState({ user: null });
+		await this.setState({ user: null });
+		await this.componentDidMount()
 	}
 
-	handleSignupOrLogin = () => {
-		this.setState({ user: userService.getUser() });
+	handleSignupOrLogin = async() => {
+		await this.setState({ user: userService.getUser() });
+		await this.componentDidMount()
 	}
 
 
 	/*--- Lifecycle Methods ---*/
 
-	async componentDidMount() {
-		console.log(this.state.user)
-		const items = await fetch('/api/items', {
-			method: 'GET',
-			headers: {
-				'content-type': 'application/json',
-				'Authorization': 'Bearer ' + tokenService.getToken(),
-			}
-		})
-		.then(res => res.json());
-		this.setState({ items });
+	componentDidMount = async () => {
+		console.log('here is user: ', userService.getUser())
+		let user = userService.getUser()
+		if(user){
+			const items = await fetch('/api/items', {
+				method: 'GET',
+				headers: {
+					'content-type': 'application/json',
+					'Authorization': 'Bearer ' + tokenService.getToken(),
+				}
+			})
+			.then(res => res.json());
+			this.setState({ items });
+		} else {
+			console.log("no user logged in")
+		}
 		console.log(this.state.items)
 	}
 

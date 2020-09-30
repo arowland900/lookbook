@@ -13,7 +13,7 @@ class ItemPage extends Component {
 	}
 
 	render() {
-		console.log("ITEM PAGE USER: ", this.props.user)
+		// console.log("ITEM PAGE USER: ", this.props.user)
 		return (
 			<div className="GamePage">
 				
