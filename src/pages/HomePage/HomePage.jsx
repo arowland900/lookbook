@@ -92,7 +92,7 @@ render(){
       	/>
       	<div className="flex-h align-flex-end">
        	This is the Home Page!! WOO!
-    
+			<img src="https://look-book-app.s3.us-west-1.amazonaws.com/1930863_32121757822_1566_n-1601440422843.jpg" alt=""/>
       	</div>
 		<div id="oc-alert-container"></div>
       	<div className="card border-light mb-3" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>

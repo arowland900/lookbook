@@ -3,16 +3,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let itemSchema = new Schema(
-  {
-    description: { type: String },
-    fileLink: { type: String },
-    s3_key: { type: String }
-  },
-  {
-    timestamps: true
-  }
+    {
+        name: String,
+        description: String,
+        photos: [String],
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    },
+    {
+        timestamps: true
+    }
 );
 
-// documentSchema.plugin(AutoIncrement, { inc_field: "document_id" });
 
-module.exports = mongoose.model("Item", itemSchema);
+module.exports = mongoose.model('Item', itemSchema);
