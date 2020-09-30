@@ -6,6 +6,11 @@ const path = require('path');
 const url = require('url');
 require('dotenv').config();
 
+module.exports = {
+	addPhoto,
+	create
+};
+
 
 // PHOTO ADDING HELPER FUNCTIONS FOR AWS
 const s3 = new aws.S3({
@@ -45,11 +50,10 @@ const uploadsBusinessGallery = multer({
 }).array('galleryImage', 4);
 
 
-module.exports = {
-	addPhoto
-};
+
 
 async function addPhoto(req, res) {
+	// console.log("REQ",req.data)
 	// router.post('/multiple-file-upload', (req, res) => {
 	console.log('hitting multi function in routes')
 	uploadsBusinessGallery(req, res, (error) => {
@@ -72,6 +76,7 @@ async function addPhoto(req, res) {
 					console.log('filenm', fileLocation);
 					galleryImgLocationArray.push(fileLocation)
 				}
+				// await Item.create()
 				// Save the file name into database
 				res.json({
 					filesArray: fileArray,
@@ -81,4 +86,12 @@ async function addPhoto(req, res) {
 		}
 	});
 	// });
+}
+
+async function create(req,res){
+	console.log("HITTING CREATE IN CONTROLLER")
+	console.log(req.body)
+	const item = await Item.create(req.body);
+	console.log("item created!: ", item)
+  	res.status(201).json(item);
 }
