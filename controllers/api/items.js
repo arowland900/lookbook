@@ -91,6 +91,8 @@ async function addPhoto(req, res) {
 async function create(req,res){
 	console.log("HITTING CREATE IN CONTROLLER")
 	console.log(req.body)
+	console.log("USER: ", req.user)
+	req.body.user = req.user._id
 	const item = await Item.create(req.body);
 	console.log("item created!: ", item)
   	res.status(201).json(item);

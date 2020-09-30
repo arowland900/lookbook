@@ -17,6 +17,7 @@ function setToken(token) {
         token = null;
       }
     }
+    console.log("TOKEN: ", token)
     return token;
   }
   

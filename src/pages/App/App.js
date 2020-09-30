@@ -7,6 +7,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import ItemPage from '../ItemPage/ItemPage';
 import NewItemPage from '../NewItemPage/NewItemPage';
 import userService from '../../utils/userService';
+import tokenService from '../../utils/tokenService';
 
 
 
@@ -26,7 +27,10 @@ class App extends Component {
 	handleAddItem = async newItemData => {
 		const newItem = await fetch('/api/items', {
 			method: 'POST',
-			headers: { 'content-type': 'application/json' },
+			headers: { 
+				'content-type': 'application/json',
+				'Authorization': 'Bearer ' + tokenService.getToken(),
+			},
 			body: JSON.stringify(newItemData)
 		}).then(res => res.json());
 		this.setState(state => ({
