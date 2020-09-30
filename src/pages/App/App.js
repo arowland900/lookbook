@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from '../../pages/HomePage/HomePage';
-
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import ItemPage from '../ItemPage/ItemPage';
+import NewItemPage from '../NewItemPage/NewItemPage';
 import userService from '../../utils/userService';
 
 
@@ -76,6 +77,20 @@ class App extends Component {
 						<LoginPage
 							history={history}
 							handleSignupOrLogin={this.handleSignupOrLogin}
+						/>
+					} />
+					<Route exact path='/items' render={({ history }) =>
+						<ItemPage
+							history={history}
+							handleSignupOrLogin={this.handleSignupOrLogin}
+						/>
+					} />
+					<Route exact path='/new' render={({ history }) =>
+						<NewItemPage
+							history={history}
+							user={this.state.user}
+							handleLogout={this.handleLogout}
+							handleAddItem={this.handleAddItem}
 						/>
 					} />
 
