@@ -96,6 +96,7 @@ async function create(req, res) {
 }
 
 async function index(req, res) {
+	console.log("REQ USER: ", req.user)
 	const items = await Item.find({user: req.user._id});
 	console.log("DA ITEMS: ", items)
 	res.status(200).json(items);

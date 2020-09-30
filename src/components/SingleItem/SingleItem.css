@@ -1,0 +1,9 @@
+.PuppyListItem-action-panel {
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    width: 200px;
+    height: auto;
+}

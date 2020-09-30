@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './NavBar.css';
 
 const NavBar = (props) => {
+    console.log(props.user)
   let nav = props.user ?
     <div>
       <span className='NavBar-welcome'>Welcome {props.user.name}!</span>

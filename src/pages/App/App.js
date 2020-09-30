@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import HomePage from '../../pages/HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import ItemPage from '../ItemPage/ItemPage';
+import ItemListPage from '../ItemListPage/ItemListPage';
 import NewItemPage from '../NewItemPage/NewItemPage';
 import userService from '../../utils/userService';
 import tokenService from '../../utils/tokenService';
@@ -39,7 +39,7 @@ class App extends Component {
 			// Using cb to wait for state to update before rerouting
 			() => {
 				console.log(this.state.items)
-				this.props.history.push('/')
+				this.props.history.push('/items')
 			});
 	}
 
@@ -47,8 +47,9 @@ class App extends Component {
 
 
 
-	handleLogout = () => {
-		userService.logout();
+	handleLogout = async () => {
+		console.log("LOGGING OUT")
+		await userService.logout();
 		this.setState({ user: null });
 	}
 
@@ -60,6 +61,7 @@ class App extends Component {
 	/*--- Lifecycle Methods ---*/
 
 	async componentDidMount() {
+		console.log(this.state.user)
 		const items = await fetch('/api/items', {
 			method: 'GET',
 			headers: {
@@ -99,10 +101,11 @@ class App extends Component {
 						/>
 					} />
 					<Route exact path='/items' render={({ history }) =>
-						<ItemPage
+						<ItemListPage
 							history={history}
 							user={this.state.user}
 							handleSignupOrLogin={this.handleSignupOrLogin}
+							items={this.state.items}
 						/>
 					} />
 					<Route exact path='/new' render={({ history }) =>
