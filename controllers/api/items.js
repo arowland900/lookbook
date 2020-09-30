@@ -8,7 +8,8 @@ require('dotenv').config();
 
 module.exports = {
 	addPhoto,
-	create
+	create,
+	index
 };
 
 
@@ -88,12 +89,14 @@ async function addPhoto(req, res) {
 	// });
 }
 
-async function create(req,res){
-	console.log("HITTING CREATE IN CONTROLLER")
-	console.log(req.body)
-	console.log("USER: ", req.user)
+async function create(req, res) {
 	req.body.user = req.user._id
 	const item = await Item.create(req.body);
-	console.log("item created!: ", item)
-  	res.status(201).json(item);
+	res.status(201).json(item);
+}
+
+async function index(req, res) {
+	const items = await Item.find({user: req.user._id});
+	console.log("DA ITEMS: ", items)
+	res.status(200).json(items);
 }

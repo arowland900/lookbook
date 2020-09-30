@@ -5,6 +5,7 @@ const itemsCtrl = require('../../controllers/api/items');
 
 router.use(require('../../config/auth'));
 router.post('/multiple-file-upload', itemsCtrl.addPhoto);
+router.get('/', checkAuth, itemsCtrl.index);
 router.post('/', checkAuth, itemsCtrl.create);
 
 

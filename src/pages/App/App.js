@@ -27,7 +27,7 @@ class App extends Component {
 	handleAddItem = async newItemData => {
 		const newItem = await fetch('/api/items', {
 			method: 'POST',
-			headers: { 
+			headers: {
 				'content-type': 'application/json',
 				'Authorization': 'Bearer ' + tokenService.getToken(),
 			},
@@ -56,6 +56,21 @@ class App extends Component {
 		this.setState({ user: userService.getUser() });
 	}
 
+
+	/*--- Lifecycle Methods ---*/
+
+	async componentDidMount() {
+		const items = await fetch('/api/items', {
+			method: 'GET',
+			headers: {
+				'content-type': 'application/json',
+				'Authorization': 'Bearer ' + tokenService.getToken(),
+			}
+		})
+		.then(res => res.json());
+		this.setState({ items });
+		console.log(this.state.items)
+	}
 
 
 	render() {
@@ -86,6 +101,7 @@ class App extends Component {
 					<Route exact path='/items' render={({ history }) =>
 						<ItemPage
 							history={history}
+							user={this.state.user}
 							handleSignupOrLogin={this.handleSignupOrLogin}
 						/>
 					} />
