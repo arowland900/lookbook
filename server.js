@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
-// app.use('/api/items', require('./routes/api/items'));
+app.use('/api/items', require('./routes/api/items'));
 // app.use('/api/outfits', require('./routes/api/outfits'));
 
 // The following "catch all" route (note the *)is necessary
