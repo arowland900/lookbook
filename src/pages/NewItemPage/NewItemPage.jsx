@@ -14,7 +14,9 @@ class NewItemPage extends Component {
 			formData: {
 				name: '',
 				description: '',
-				photos: ''
+				photos: '',
+				type: '',
+				season: ''
 			}
 		}
 	}
@@ -28,12 +30,12 @@ class NewItemPage extends Component {
 
 	handleChange = e => {
 		console.log("hitting handle change!")
-		console.log(this.state.formData)
 		const formData = { ...this.state.formData, [e.target.name]: e.target.value };
 		this.setState({
 			formData,
 			// invalidForm: !this.formRef.current.checkValidity()
 		});
+		// console.log(this.state.formData)
 	};
 
 	multipleFileChangedHandler = (event) => {
@@ -117,24 +119,34 @@ class NewItemPage extends Component {
 	render() {
 		return (
 			<div className="GamePage">
-			
-				
+
+
 				<div id="oc-alert-container"></div>
 				<div className="card border-light mb-3" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
 					<div className="card-header">
 						<h3 style={{ color: '#555', marginLeft: '12px' }}>Upload Muliple Images</h3>
-						<p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 400px x 400px ( Max 2MB )</p>
+						{/* <p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 400px x 400px ( Max 2MB )</p> */}
 					</div>
 					<div className="card-body">
-						<p className="card-text">Please upload the Gallery Images for your gallery</p>
+						{/* <p className="card-text">Please upload the Gallery Images for your gallery</p> */}
 						<input type="file" multiple onChange={this.multipleFileChangedHandler} />
 
 					</div>
 					<div className="card-body">
+						<p className="card-text">Outfit / Piece</p>
+						<select name="type" onChange={this.handleChange}>
+							<option value="item">Item</option>
+							<option value="outfit">Outfit</option>
+						</select>
+						<p className="card-text">Season</p>
+						<select name="season" onChange={this.handleChange}>
+							<option value="fw">Fall + Winter</option>
+							<option value="ss">Spring + Summer</option>
+						</select>
 						<p className="card-text">Name</p>
 						<input type="text" name="name" onChange={this.handleChange} />
 						<p className="card-text">Description</p>
-						<input type="text" name="description" onChange={this.handleChange} />
+						<textarea type="text" name="description" onChange={this.handleChange} />
 						<div className="mt-5">
 							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>
 						</div>
