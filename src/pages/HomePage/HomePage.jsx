@@ -9,10 +9,10 @@ class HomePage extends Component {
 		console.log("HOME PAGE USER: ", this.props.user)
 		return (
 			<div className="GamePage">
-				<NavBar
+				{/* <NavBar
 					user={this.props.user}
 					handleLogout={this.props.handleLogout}
-				/>
+				/> */}
 				<div className="flex-h align-flex-end">
 					This is the Home Page!! WOO!
 			

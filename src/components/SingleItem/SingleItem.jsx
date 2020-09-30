@@ -2,7 +2,7 @@ import React from 'react';
 // import {Link} from 'react-router-dom';
 import './SingleItem.css';
 
-function PuppyListItem({item}) { 
+function SingleItem({item}) { 
   return (
     <div className='panel panel-default'>
       <div className="panel-heading">
@@ -28,4 +28,4 @@ function PuppyListItem({item}) {
   );
 }
 
-export default PuppyListItem;
+export default SingleItem;

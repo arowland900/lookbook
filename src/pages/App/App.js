@@ -8,6 +8,7 @@ import ItemListPage from '../ItemListPage/ItemListPage';
 import NewItemPage from '../NewItemPage/NewItemPage';
 import userService from '../../utils/userService';
 import tokenService from '../../utils/tokenService';
+import NavBar from '../../components/NavBar/NavBar'
 
 
 
@@ -79,6 +80,10 @@ class App extends Component {
 		return (
 			<div>
 				<header className='header-footer'>L O O K &nbsp;&nbsp;&nbsp;  B O O K</header>
+				<NavBar
+					user={this.state.user}
+					handleLogout={this.handleLogout}
+				/>
 				<Switch>
 					<Route exact path='/' render={() =>
 						<HomePage

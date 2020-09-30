@@ -16,10 +16,7 @@ class ItemPage extends Component {
 		console.log("ITEM PAGE USER: ", this.props.user)
 		return (
 			<div className="GamePage">
-				<NavBar
-					user={this.props.user}
-					handleLogout={this.props.handleLogout}
-				/>
+				
 				<div className="flex-h align-flex-end">
 					This is the Item Page!! WOO!
 			
