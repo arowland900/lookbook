@@ -4,10 +4,10 @@ import $ from 'jquery';
 import './ItemDetailPage.css';
 
 class ItemDetailPage extends Component {
-  // item = this.props.location.state.item
 
   state = {
-    item:''
+    item:'', 
+    itemInfo: ''
   }
   
 
@@ -26,6 +26,7 @@ class ItemDetailPage extends Component {
   componentDidMount = async () => {
     let item = await this.props.location.state.item
     this.setState({ item })
+    // GET ALL ITEM INFO IN HERE TO DISPLAY ON PAGE
     await this.fadeDiv()
 
   }
@@ -33,9 +34,13 @@ class ItemDetailPage extends Component {
     return (
       <div className='itemDetailPage'>
         {this.state.item ?
-          <div className='ItemDetailPage-item'>
-            <h3>{this.state.item.name}</h3>
-            <p>{this.state.item.description}</p>
+          <div className='mainCard'>
+            <div className='infoHolder'>
+{/* DEPENDING ON WHETHER THE IMAGE IS TALLER OR WIDER, USE THE HEIGHT OR WIDTH AS THE DEFAULT PROPERTY,
+BUT SET A MAXIMUM SIZE --- https://www.grailed.com/listings/16820170-iron-heart-14oz-selvedge-denim-slim-straight-cut-jeans-666s-142bb */}
+              <h3>{this.state.item.name}</h3>
+              <p>{this.state.item.description}</p>
+            </div>
             <div className='imgHolder'>
               <img src={this.state.item.photos[0]} alt="" />
             </div>

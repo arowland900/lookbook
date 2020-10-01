@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(253, 253, 253);
 }
 
 code {
@@ -36,3 +37,12 @@ button:focus, .btn:focus {
   text-align: center;
 }
 
+a { text-decoration: none; color:rgb(26, 26, 29) } /* Globally */
+
+/* Each state */
+
+/* a:visited { text-decoration: none; color:red; } */
+a:hover { text-decoration: none; color:blue; }
+/* a:focus { text-decoration: none; color:green } */
+a.active {color:rgb(255, 0, 43) }
+/* a:hover, a:active { text-decoration: none; color:black } */

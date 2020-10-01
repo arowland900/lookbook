@@ -26,6 +26,9 @@ class App extends Component {
 
 
 	/*--- Callback Methods ---*/
+
+	
+
 	getItem = (idx) => {
 		return this.state.items[idx];
 	  }
