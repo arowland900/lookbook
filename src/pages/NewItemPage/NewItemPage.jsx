@@ -112,6 +112,7 @@ class NewItemPage extends Component {
 					if (200 === response.status) {
 						// If file size is larger than expected.
 						if (response.data.error) {
+							console.log(response.data.error)
 							if ('LIMIT_FILE_SIZE' === response.data.error.code) {
 								this.ocShowAlert('Max size: 2MB', 'red');
 							} else if ('LIMIT_UNEXPECTED_FILE' === response.data.error.code) {
