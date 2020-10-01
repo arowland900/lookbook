@@ -5,6 +5,7 @@ import HomePage from '../../pages/HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import ItemListPage from '../ItemListPage/ItemListPage';
+import ItemDetailPage from '../ItemDetailPage/ItemDetailPage';
 import NewItemPage from '../NewItemPage/NewItemPage';
 import userService from '../../utils/userService';
 import tokenService from '../../utils/tokenService';
@@ -25,6 +26,9 @@ class App extends Component {
 
 
 	/*--- Callback Methods ---*/
+	getItem = (idx) => {
+		return this.state.items[idx];
+	  }
 	handleAddItem = async newItemData => {
 		const newItem = await fetch('/api/items', {
 			method: 'POST',
@@ -55,7 +59,7 @@ class App extends Component {
 		await this.componentDidMount()
 	}
 
-	handleSignupOrLogin = async() => {
+	handleSignupOrLogin = async () => {
 		await this.setState({ user: userService.getUser() });
 		await this.componentDidMount()
 	}
@@ -66,7 +70,7 @@ class App extends Component {
 	componentDidMount = async () => {
 		console.log('here is user: ', userService.getUser())
 		let user = userService.getUser()
-		if(user){
+		if (user) {
 			const items = await fetch('/api/items', {
 				method: 'GET',
 				headers: {
@@ -74,8 +78,8 @@ class App extends Component {
 					'Authorization': 'Bearer ' + tokenService.getToken(),
 				}
 			})
-			.then(res => res.json());
-			
+				.then(res => res.json());
+
 			this.setState({ items });
 		} else {
 			console.log("no user logged in")
@@ -127,6 +131,13 @@ class App extends Component {
 							user={this.state.user}
 							handleLogout={this.handleLogout}
 							handleAddItem={this.handleAddItem}
+						/>
+					} />
+					<Route path='/details' render={({location}) =>
+						<ItemDetailPage
+							location={location}
+							user={this.state.user}
+							getItem={this.getItem}
 						/>
 					} />
 

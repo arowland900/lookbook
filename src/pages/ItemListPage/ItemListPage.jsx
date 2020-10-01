@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch,Link} from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import $ from 'jquery';
 import SingleItem from '../../components/SingleItem/SingleItem'
@@ -34,18 +35,33 @@ class ItemPage extends Component {
 		return (
 			<div className="my-closet" style={{margin: '0 auto'}}>
 				
-				<div className="flex-h align-flex-end">
+				<div className="flex-h align-flex-end" style={{paddingBottom: '2em'}}>
 					This is the Item Page!! WOO!
 			
 				</div>
+
 				<div className='PuppyListPage-grid'>
-                    {this.props.items.map(item => 
+				
+					{this.props.items.map((item,idx) => 
+
+					<Link
+						className='btn btn-xs btn-info'
+						to={{
+							pathname: '/details',
+							state: {item},
+						}}
+						key={idx}
+					>
+					
                         <SingleItem
                             item={item}
                             key={item._id}
-                        />
+							/>
+					</Link>
                     )}
-                 </div>
+					
+                </div>
+
 			</div>
 		);
 	}
