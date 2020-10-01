@@ -1,6 +1,6 @@
 .PuppyListItem-action-panel {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 /* img {
