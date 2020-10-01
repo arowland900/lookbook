@@ -8,16 +8,10 @@ function SingleItem({ item }) {
     <div className='panel panel-default'>
       <div className="panel-heading">
         <h3 className='panel-title'>{item.name}</h3>
-        <p className='panel-title'>{item.description}</p>
-        {item.photos.map((photo, idx) => {
-          // let background=  `#eee url(${photo})`
-          return <img
-            key={idx} className='center-cropped'
-            src={photo} alt=""
-            style={{backgroundImage:'url(' + {photo} + ')'}}
+        <p className='panel-title img-padding'>{item.description}</p>
+          <img className='center-cropped'
+            src={item.photos[0]} alt={item.name}
           />
-        })}
-        {/* <img src={item.} alt=""/> */}
       </div>
       {/* <div className='panel-footer PuppyListItem-action-panel'>
         <Link
