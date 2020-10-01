@@ -75,6 +75,7 @@ class App extends Component {
 				}
 			})
 			.then(res => res.json());
+			
 			this.setState({ items });
 		} else {
 			console.log("no user logged in")

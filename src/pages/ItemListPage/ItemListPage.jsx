@@ -39,7 +39,7 @@ class ItemPage extends Component {
 			
 				</div>
 				<div className='PuppyListPage-grid'>
-                    {this.props.items.reverse().map(item => 
+                    {this.props.items.map(item => 
                         <SingleItem
                             item={item}
                             key={item._id}
