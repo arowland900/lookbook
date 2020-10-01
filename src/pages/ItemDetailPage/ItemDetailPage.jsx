@@ -34,14 +34,11 @@ class ItemDetailPage extends Component {
       <div className='itemDetailPage'>
         {this.state.item ?
           <div className='ItemDetailPage-item'>
-            <span>NAME:</span>
-            <span>{this.state.item.name}</span>
-            <span>DESCRIPTION:</span>
-            <span>{this.state.item.description}</span>
-            <span>
+            <h3>{this.state.item.name}</h3>
+            <p>{this.state.item.description}</p>
+            <div className='imgHolder'>
               <img src={this.state.item.photos[0]} alt="" />
-            </span>
-            <Link to='/'>RETURN</Link>
+            </div>
           </div>
           :
           <h3>Loading...</h3>

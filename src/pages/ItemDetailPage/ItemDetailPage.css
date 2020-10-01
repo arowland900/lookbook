@@ -1,8 +1,17 @@
 img {
-    height: 500px;
-    width: auto
+    height: 400px;
+    width: auto;
+    
 }
-
+h3, p {
+    text-align: center;
+    margin: 0 auto;
+}
+.imgHolder {
+    display: flex;
+  justify-content: center;
+}
 .itemDetailPage {
     display: none;
+    margin: 0 auto;
 }
