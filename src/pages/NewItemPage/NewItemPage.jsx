@@ -59,7 +59,33 @@ class NewItemPage extends Component {
 		}, 3000);
 	};
 
+	fadeDiv = () => {
+		let div = document.querySelector('.whole-card'),
+			loading = document.querySelector('.loading')
+		setTimeout(function () {
+			$(div).fadeOut('slow')
+
+		}, 500)
+		setTimeout(async function () {
+			await $(loading).fadeIn(1000)
+			$(loading).css('display', 'flex')
+
+		}, 1000)
+
+	}
+
+	fadeDivIn = () => {
+		let div = document.querySelector('.whole-card')
+		// setTimeout(function () {
+			$(div).fadeIn('slow')
+
+		// }, 500)
+
+
+	}
+
 	multipleFileUploadHandler = () => {
+		this.fadeDiv()
 		const data = new FormData();
 		data.itemInfo = this.state.formData
 		console.log("THIS IS DATA: ", data)
@@ -96,6 +122,7 @@ class NewItemPage extends Component {
 							}
 						} else {
 							// Success
+							// this.fadeDiv()
 							let fileName = response.data;
 							console.log('fileName', fileName);
 							const formData = { ...this.state.formData, 'photos': fileName.locationArray };
@@ -103,6 +130,7 @@ class NewItemPage extends Component {
 								formData,
 								// invalidForm: !this.formRef.current.checkValidity()
 							});
+							// await this.fadeDiv()
 							this.props.handleAddItem(this.state.formData);
 							this.ocShowAlert('File Uploaded', '#3089cf');
 						}
@@ -116,13 +144,21 @@ class NewItemPage extends Component {
 			this.ocShowAlert('Please upload file', 'red');
 		}
 	};
+
+
+	/*--- Lifecycle Methods ---*/
+
+	componentDidMount = async () => {
+		await this.fadeDivIn()
+	}
+
 	render() {
 		return (
 			<div className="GamePage">
 
 
 				<div id="oc-alert-container"></div>
-				<div className="card border-light mb-3" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
+				<div className="card border-light mb-3 whole-card" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
 					<div className="card-header">
 						<h3 style={{ color: '#555', marginLeft: '12px' }}>Upload Muliple Images</h3>
 						{/* <p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 400px x 400px ( Max 2MB )</p> */}
@@ -152,6 +188,7 @@ class NewItemPage extends Component {
 						</div>
 					</div>
 				</div>
+				<div className='loading'>Loading...</div>
 			</div>
 		);
 	}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
+import $ from 'jquery';
 import SingleItem from '../../components/SingleItem/SingleItem'
 import './ItemListPage.css';
 
@@ -10,6 +11,22 @@ class ItemPage extends Component {
 		this.state = {
 			user: this.props.user
 		}
+	}
+
+	fadeDiv = () => {
+		let div = document.querySelector('.my-closet')
+			// setTimeout(function(){
+				$(div).fadeIn('slow')
+				
+			// }, 500)
+		
+			
+	}
+
+		/*--- Lifecycle Methods ---*/
+
+	componentDidMount = async () => {
+			await this.fadeDiv()
 	}
 
 	render() {
