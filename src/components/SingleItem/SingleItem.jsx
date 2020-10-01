@@ -2,14 +2,20 @@ import React from 'react';
 // import {Link} from 'react-router-dom';
 import './SingleItem.css';
 
-function SingleItem({item}) { 
+function SingleItem({ item }) {
+
   return (
     <div className='panel panel-default'>
       <div className="panel-heading">
         <h3 className='panel-title'>{item.name}</h3>
         <p className='panel-title'>{item.description}</p>
         {item.photos.map((photo, idx) => {
-          return <img key={idx} src={photo} alt=""/>
+          // let background=  `#eee url(${photo})`
+          return <img
+            key={idx} className='center-cropped'
+            src={photo} alt=""
+            style={{backgroundImage:'url(' + {photo} + ')'}}
+          />
         })}
         {/* <img src={item.} alt=""/> */}
       </div>

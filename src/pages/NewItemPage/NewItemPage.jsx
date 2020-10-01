@@ -133,9 +133,9 @@ class NewItemPage extends Component {
 
 					</div>
 					<div className="card-body">
-						<p className="card-text">Outfit / Piece</p>
+						<p className="card-text">Piece / Outfit</p>
 						<select name="type" onChange={this.handleChange}>
-							<option value="item">Item</option>
+							<option value="item">Piece</option>
 							<option value="outfit">Outfit</option>
 						</select>
 						<p className="card-text">Season</p>

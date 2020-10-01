@@ -3,7 +3,21 @@
     justify-content: space-around;
 }
 
-img {
+/* img {
     width: 200px;
     height: auto;
+} */
+/* .center-cropped {
+    width: 200px;
+    height: auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+  } */
+  .center-cropped {
+    /* background: #eee url(http://www.google.co.cr/logos/classicplus.png) center center; */
+    width: 200px;
+    height:200px;
+    border: 1px solid red;
+    text-indent: -9999px;
+    object-fit: cover;
 }
