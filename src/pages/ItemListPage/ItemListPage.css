@@ -3,4 +3,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 5px;
-  }
+}
+
+.my-closet {
+  padding-left: 10em;
+  padding-right: 10em;
+}

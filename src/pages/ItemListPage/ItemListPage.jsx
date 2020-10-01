@@ -15,7 +15,7 @@ class ItemPage extends Component {
 	render() {
 		// console.log("ITEM PAGE USER: ", this.props.user)
 		return (
-			<div className="GamePage">
+			<div className="my-closet">
 				
 				<div className="flex-h align-flex-end">
 					This is the Item Page!! WOO!
