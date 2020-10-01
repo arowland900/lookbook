@@ -74,11 +74,11 @@ class NewItemPage extends Component {
 
 	}
 
-	fadeDivIn = () => {
+	fadeDivIn = async () => {
 		let div = document.querySelector('.whole-card')
 		// setTimeout(function () {
-			$(div).fadeIn('slow')
-
+			await $(div).fadeIn('slow')
+			$(div).css('display', 'flex')
 		// }, 500)
 
 
@@ -158,7 +158,10 @@ class NewItemPage extends Component {
 
 
 				<div id="oc-alert-container"></div>
-				<div className="card border-light mb-3 whole-card" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
+				<div 
+					className="card border-light mb-3 whole-card" 
+					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
+				>
 					<div className="card-header">
 						<h3 style={{ color: '#555', marginLeft: '12px' }}>Upload Muliple Images</h3>
 						{/* <p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 400px x 400px ( Max 2MB )</p> */}

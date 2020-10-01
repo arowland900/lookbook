@@ -7,5 +7,12 @@
 }
 
 .whole-card{
+    padding-left: 10em;
+    padding-right: 10em;
+    margin-left: 20em;
+    margin-right: 20em;
     display: none;
+    justify-content: center;
+    align-items: center;
 }
+
