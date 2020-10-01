@@ -15,8 +15,8 @@
   } */
   .center-cropped {
     /* background: #eee url(http://www.google.co.cr/logos/classicplus.png) center center; */
-    width: 200px;
-    height:200px;
+    width: 250px;
+    height:250px;
     border: 1px solid red;
     text-indent: -9999px;
     object-fit: cover;
