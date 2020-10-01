@@ -39,7 +39,7 @@ class App extends Component {
 			body: JSON.stringify(newItemData)
 		}).then(res => res.json());
 		this.setState(state => ({
-			items: [...state.items, newItem]
+			items: [newItem, ...state.items]
 		}),
 			// Using cb to wait for state to update before rerouting
 			() => {
