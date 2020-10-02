@@ -21,6 +21,7 @@ img {
 .infoHolder {
     height: 566.59px;
     width: 500px;
+    min-width: 500px;
     /* display: flex;
     justify-content: flex-start; */
     background-color: rgb(247, 231, 218);
@@ -89,8 +90,8 @@ img {
 .itemDetailPage {
     display: none;
     margin: 0 auto;
-    padding-left: 20em;
-    padding-right: 20em;
+    padding-left: 12em;
+    padding-right: 12em;
 }
 
 
@@ -99,7 +100,7 @@ img {
     margin: '0 auto';
     /* padding: 20px; */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-column-gap: 5px;
     grid-row-gap: 1px;
     align-items: center;
