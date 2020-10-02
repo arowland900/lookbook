@@ -3,6 +3,7 @@ import axios from 'axios';
 import $ from 'jquery';
 import './NewItemPage.css';
 import camera from '../../../src/camera.png'
+import { Link } from 'react-router-dom';
 
 class NewItemPage extends Component {
 
@@ -28,6 +29,10 @@ class NewItemPage extends Component {
 	// 	e.preventDefault();
 	// 	this.props.handleAddItem(this.state.formData);
 	// };
+
+	refreshPage = () => {
+		window.location.reload()
+	}
 
 	handleChange = e => {
 		console.log("hitting handle change!")
@@ -90,27 +95,31 @@ class NewItemPage extends Component {
 		$(document.querySelector('#photo-label')).css('pointer-events', 'none')
 		let cardHead = document.querySelector('.card-header')
 		cardHead.classList.add('fadeOut')
-		
+
 		let oFReader = new FileReader();
 		let selectedPhotos = document.getElementById("upload-photo").files
-		
-		setTimeout(() =>{
+
+		setTimeout(() => {
 			oFReader.readAsDataURL(selectedPhotos[0]);
-			
-			oFReader.onload =  function (oFREvent) {
+
+			oFReader.onload = function (oFREvent) {
 				let img = document.getElementById("photo-label-img")
 				img.classList.add('NewPageItem-center-cropped')
 				img.src = oFREvent.target.result;
-				
+
 			};
-		},500)
-		setTimeout(function(){
+		}, 500)
+		setTimeout(function () {
 			cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
+			if (selectedPhotos.length > 8){
+				cardHead.childNodes[0].style.color ='red'
+				document.getElementById('reset').style.display = 'block'
+			}
 			cardHead.classList.remove('fadeOut')
 			cardHead.classList.add('fadeIn')
 		}, 1000)
-		
-    };
+
+	};
 
 	multipleFileUploadHandler = () => {
 
@@ -194,13 +203,15 @@ class NewItemPage extends Component {
 					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
 				>
 					<div className="card-header">
-						<h3 style={{ color: '#555', display:'block' }}>Select Up To 8 Images</h3>
-						<label id='photo-label' style={{width:'200px', height: '200px'}} htmlFor="upload-photo">
-							<img id='photo-label-img' src={camera} alt="" style={{ height: '200px', width: '200px', margin: '0 auto', objectFit:'cover' }} />
+						<h3 style={{ color: '#555', display: 'block' }}>Select Up To 8 Images</h3>
+						<label id='photo-label' style={{ width: '200px', height: '200px' }} htmlFor="upload-photo">
+							<img id='photo-label-img' src={camera} alt="" style={{ height: '200px', width: '200px', margin: '0 auto', objectFit: 'cover' }} />
 						</label>
 						{/* <p className="card-text">Please upload the Gallery Images for your gallery</p> */}
 						<input id='upload-photo' type="file" multiple onChange={this.multipleFileChangedHandler} />
-
+						<div >
+							<p id='reset' onClick={this.refreshPage}>Reset</p>
+						</div>
 					</div>
 					<div className="card-body">
 						<div className='form-div'>
@@ -273,6 +284,7 @@ class NewItemPage extends Component {
 					</div>
 
 				</div>
+
 				<div className='loading'>Loading...</div>
 			</div>
 		);
