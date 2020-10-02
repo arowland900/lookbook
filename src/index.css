@@ -16,7 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(253, 253, 253);
-  min-height: 700px;
+  /* min-height: 700px; */
   height: 100%;
     overflow: auto;
 }
@@ -52,7 +52,7 @@ button:focus, .btn:focus {
   height: 30px;
   padding: 10px;
   margin: 15px 0;
-  color: grey;
+  color: rgb(104, 104, 104);
   font-size: 18px;
   text-align: center;
 }
