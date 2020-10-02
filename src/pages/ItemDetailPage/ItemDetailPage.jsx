@@ -28,18 +28,19 @@ class ItemDetailPage extends Component {
 	}
 
 	changeImg = (e) => {
-		console.log("THIS IS E TARGET PARENT: ", e.target.parentNode.children)
-		console.log("THIS IS E TARGET: ", e.target)
 		let siblings = e.target.parentNode.children
 		let el = e.target
-		// siblings.forEach(s => {
-		// 	s.classList.add('not-seleted')
-		// })
+		console.log(e.target.src)
 		for(let i = 0; i < siblings.length; i++){
 			siblings[i].classList.add('not-selected')
 		}
 		el.classList.remove('not-selected')
 
+		this.setState({currentImg: el.src})
+		console.log("state: ", this.state)
+		let img = document.querySelector('.imgSquare img')
+		console.log(img)
+		img.src = el.src
 	}
 
 	/*--- Lifecycle Methods ---*/
