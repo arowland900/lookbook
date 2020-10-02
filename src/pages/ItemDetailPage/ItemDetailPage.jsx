@@ -27,6 +27,21 @@ class ItemDetailPage extends Component {
 		}
 	}
 
+	changeImg = (e) => {
+		console.log("THIS IS E TARGET PARENT: ", e.target.parentNode.children)
+		console.log("THIS IS E TARGET: ", e.target)
+		let siblings = e.target.parentNode.children
+		let el = e.target
+		// siblings.forEach(s => {
+		// 	s.classList.add('not-seleted')
+		// })
+		for(let i = 0; i < siblings.length; i++){
+			siblings[i].classList.add('not-selected')
+		}
+		el.classList.remove('not-selected')
+
+	}
+
 	/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
@@ -63,7 +78,8 @@ BUT SET A MAXIMUM SIZE --- https://www.grailed.com/listings/16820170-iron-heart-
 
 							<div className="carousel">
 								{this.state.item.photos.map((p, i) => {
-									return <img src={p} alt="" key={i} className={`ItemDetailPage-center-cropped tiny${i}`} />
+									return <img src={p} alt="" key={i} onClick={this.changeImg} className={`ItemDetailPage-center-cropped tiny${i} ${!i ? '' : 'not-selected'}`} />
+							
 
 								})}
 							</div>
