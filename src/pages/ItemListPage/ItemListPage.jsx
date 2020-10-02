@@ -30,10 +30,10 @@ class ItemPage extends Component {
 		return (
 			<div className="my-closet" style={{margin: '0 auto'}}>
 				
-				<div className="flex-h align-flex-end" style={{paddingBottom: '2em'}}>
+				{/* <div className="flex-h align-flex-end" style={{paddingBottom: '2em'}}>
 					This is the Item Page!! WOO!
 			
-				</div>
+				</div> */}
 
 				<div className='PuppyListPage-grid'>
 				

@@ -1,3 +1,14 @@
+html {
+  background-color: coral;
+  overflow: hidden;
+  height: 100%;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +16,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(253, 253, 253);
+  min-height: 700px;
+  height: 100%;
+    overflow: auto;
 }
 
 code {
@@ -15,11 +29,10 @@ a {
   text-decoration: none;
   color: rgb(26, 26, 29)
 }
+
 a.active {
   color: rgb(255, 0, 43)
 }
-
-
 
 .flex-h {
   display: flex;
@@ -44,8 +57,6 @@ button:focus, .btn:focus {
   text-align: center;
 }
 
-
-
 /* Globally */
 
 /* Each state */
@@ -58,6 +69,5 @@ button:focus, .btn:focus {
 } */
 
 /* a:focus { text-decoration: none; color:green } */
-
 
 /* a:hover, a:active { text-decoration: none; color:black } */

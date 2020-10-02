@@ -177,7 +177,7 @@ class NewItemPage extends Component {
 							});
 							// await this.fadeDiv()
 							this.props.handleAddItem(this.state.formData);
-							this.ocShowAlert('File Uploaded', '#3089cf');
+							// this.ocShowAlert('File Uploaded', '#3089cf');
 						}
 					}
 				}).catch((error) => {

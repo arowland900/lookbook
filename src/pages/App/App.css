@@ -1,0 +1,6 @@
+#sticky {
+    position: fixed;
+    background-color: coral;
+    width: 100%;
+    /* margin-bottom: -300px; */
+}

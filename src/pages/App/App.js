@@ -27,12 +27,12 @@ class App extends Component {
 
 
 	/*--- Callback Methods ---*/
-	
-	
+
+
 
 	getItem = (idx) => {
 		return this.state.items[idx];
-	  }
+	}
 	handleAddItem = async newItemData => {
 		const newItem = await fetch('/api/items', {
 			method: 'POST',
@@ -78,7 +78,7 @@ class App extends Component {
 		// 	// debugger
 		// 	this.state.reloaded = true
 		// 	// debugger
-			
+
 		// })
 		let user = userService.getUser()
 		if (user) {
@@ -104,57 +104,63 @@ class App extends Component {
 		// }
 		return (
 			<div>
-				<header className='header-footer'>L O O K &nbsp;&nbsp;&nbsp;  B O O K</header>
-				<NavBar
-					user={this.state.user}
-					handleLogout={this.handleLogout}
-				/>
-				<Switch>
-					<Route exact path='/' render={() =>
-						<HomePage
+				<div>
+					<div id='sticky'>
+						<header className='header-footer'>L O O K &nbsp;&nbsp;&nbsp;  B O O K</header>
+						<NavBar
 							user={this.state.user}
 							handleLogout={this.handleLogout}
-							handleAddItem={this.handleAddItem}
 						/>
-					} />
+					</div>
+				</div>
+				<div style={{paddingTop: '150px', paddingBottom: '100px'}}>
+					<Switch>
+						<Route exact path='/' render={() =>
+							<HomePage
+								user={this.state.user}
+								handleLogout={this.handleLogout}
+								handleAddItem={this.handleAddItem}
+							/>
+						} />
 
-					<Route exact path='/signup' render={({ history }) =>
-						<SignupPage
-							history={history}
-							handleSignupOrLogin={this.handleSignupOrLogin}
-						/>
-					} />
-					<Route exact path='/login' render={({ history }) =>
-						<LoginPage
-							history={history}
-							handleSignupOrLogin={this.handleSignupOrLogin}
-						/>
-					} />
-					<Route exact path='/items' render={({ history }) =>
-						<ItemListPage
-							history={history}
-							user={this.state.user}
-							handleSignupOrLogin={this.handleSignupOrLogin}
-							items={this.state.items}
-						/>
-					} />
-					<Route exact path='/new' render={({ history }) =>
-						<NewItemPage
-							history={history}
-							user={this.state.user}
-							handleLogout={this.handleLogout}
-							handleAddItem={this.handleAddItem}
-						/>
-					} />
-					<Route path='/details' render={({location}) =>
-						<ItemDetailPage
-							location={location}
-							user={this.state.user}
-							getItem={this.getItem}
-						/>
-					} />
+						<Route exact path='/signup' render={({ history }) =>
+							<SignupPage
+								history={history}
+								handleSignupOrLogin={this.handleSignupOrLogin}
+							/>
+						} />
+						<Route exact path='/login' render={({ history }) =>
+							<LoginPage
+								history={history}
+								handleSignupOrLogin={this.handleSignupOrLogin}
+							/>
+						} />
+						<Route exact path='/items' render={({ history }) =>
+							<ItemListPage
+								history={history}
+								user={this.state.user}
+								handleSignupOrLogin={this.handleSignupOrLogin}
+								items={this.state.items}
+							/>
+						} />
+						<Route exact path='/new' render={({ history }) =>
+							<NewItemPage
+								history={history}
+								user={this.state.user}
+								handleLogout={this.handleLogout}
+								handleAddItem={this.handleAddItem}
+							/>
+						} />
+						<Route path='/details' render={({ location }) =>
+							<ItemDetailPage
+								location={location}
+								user={this.state.user}
+								getItem={this.getItem}
+							/>
+						} />
 
-				</Switch>
+					</Switch>
+				</div>
 			</div>
 		);
 	}
