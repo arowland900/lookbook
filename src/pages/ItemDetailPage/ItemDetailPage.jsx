@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $, { css } from 'jquery';
+import $ from 'jquery';
 import './ItemDetailPage.css';
 
 class ItemDetailPage extends Component {
@@ -21,7 +21,7 @@ class ItemDetailPage extends Component {
 			$(mainImg).css('height', 500)
 			$(mainImg).css('width', 'auto')
 		} else {
-			$(mainImg).css('width', 500)
+			$(mainImg).css('width', 550)
 			$(mainImg).css('height', 'auto')
 		}
 		if(el){
@@ -54,11 +54,23 @@ class ItemDetailPage extends Component {
 	/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
+		console.log("mounted itemDetailPage")
 		let item = await this.props.location.state.item
 		let currentImg = this.state.currentImg ? this.state.currentImg : item.photos[0]
 		this.setState({ item, currentImg })
 		await this.resize('.mainImg')
 		await this.fadeDiv()
+		if(this.state.item.photos.length === 8){
+			 $(document.querySelector('.carousel')).css('justify-content', 'space-between')
+			
+		} else {
+			let tinyImgs = document.querySelectorAll('.ItemDetailPage-center-cropped')
+			for(let i = 0; i < tinyImgs.length; i++){
+				console.log(tinyImgs[i])
+				tinyImgs[i].setAttribute('style', 'margin-right: .5em')
+			}
+
+		}
 	}
 
 	render() {

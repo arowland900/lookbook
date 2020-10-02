@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import $ from 'jquery';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import HomePage from '../../pages/HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';

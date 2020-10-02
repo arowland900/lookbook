@@ -15,8 +15,8 @@ img {
     text-indent: -9999px;
     object-fit: cover;
     margin-top: .25em;
-    /* margin-right: .25vw;
-    margin-left: .25vw */
+    /* margin-right: .25em; */
+    /* margin-left: .25em */
 }
 
 .infoHolder {
@@ -101,7 +101,7 @@ img {
 .carousel {
     background-color: white;
     display:flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .mainCard {
