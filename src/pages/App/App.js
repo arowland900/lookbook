@@ -113,7 +113,7 @@ class App extends Component {
 						/>
 					</div>
 				</div>
-				<div style={{paddingTop: '150px', paddingBottom: '100px'}}>
+				<div id="main-holder" style={{paddingTop: '150px', paddingBottom: '100px'}}>
 					<Switch>
 						<Route exact path='/' render={() =>
 							<HomePage

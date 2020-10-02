@@ -3,6 +3,9 @@
     justify-content: center;
     margin: 0 0 20px;
     /* position: fixed; */
+     -webkit-filter: opacity(0.999);
+     position: relative;
+    z-index: 9999;
 
 }
 

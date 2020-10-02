@@ -125,6 +125,8 @@ class NewItemPage extends Component {
 			}
 			cardHead.classList.remove('fadeOut')
 			cardHead.classList.add('fadeIn')
+			document.getElementById('reset').style.display = 'block'
+			document.getElementById('reset').textContent = 'Reset'
 		}, 1000)
 
 	};
