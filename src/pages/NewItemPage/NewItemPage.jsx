@@ -53,17 +53,19 @@ class NewItemPage extends Component {
 	};
 
 	ocShowAlert = (message, background = '#3089cf') => {
-		let alertContainer = document.querySelector('#oc-alert-container'),
-			alertEl = document.createElement('div'),
-			textNode = document.createTextNode(message);
-		alertEl.setAttribute('class', 'oc-alert-pop-up');
-		$(alertEl).css('background', background);
-		alertEl.appendChild(textNode);
-		alertContainer.appendChild(alertEl);
+		let alertContainer = document.getElementById('reset')
+		alertContainer.style.display = 'inline'
+		alertContainer.textContent = message
+		// let alertContainer = document.querySelector('#reset'),
+		// alertEl = document.createElement('div'),
+		// textNode = document.createTextNode(message);
+		// $(alertEl).css('background', background);
+		// alertEl.appendChild(textNode);
+		// alertContainer.appendChild(textNode);
 		setTimeout(function () {
-			$(alertEl).fadeOut('slow');
-			$(alertEl).remove();
-		}, 3000);
+			$(alertContainer).fadeOut(1000);
+			// $(alertEl).remove();
+		}, 5000);
 	};
 
 	fadeDiv = () => {
@@ -98,7 +100,7 @@ class NewItemPage extends Component {
 
 		let oFReader = new FileReader();
 		let selectedPhotos
-		if(drag){
+		if (drag) {
 			selectedPhotos = this.state.selectedFiles
 		} else {
 			selectedPhotos = document.getElementById("upload-photo").files
@@ -119,6 +121,7 @@ class NewItemPage extends Component {
 			if (selectedPhotos.length > 8) {
 				cardHead.childNodes[0].style.color = 'red'
 				document.getElementById('reset').style.display = 'block'
+				document.getElementById('reset').textContent = 'Reset'
 			}
 			cardHead.classList.remove('fadeOut')
 			cardHead.classList.add('fadeIn')
@@ -128,7 +131,7 @@ class NewItemPage extends Component {
 
 	multipleFileUploadHandler = () => {
 
-		this.fadeDiv()
+		// this.fadeDiv()
 		const data = new FormData();
 		data.itemInfo = this.state.formData
 		let selectedFiles = this.state.selectedFiles;
@@ -164,7 +167,7 @@ class NewItemPage extends Component {
 							}
 						} else {
 							// Success
-							// this.fadeDiv()
+							this.fadeDiv()
 							let fileName = response.data;
 							console.log('fileName', fileName);
 							const formData = { ...this.state.formData, 'photos': fileName.locationArray };
@@ -203,17 +206,17 @@ class NewItemPage extends Component {
 			e.preventDefault()
 			e.stopPropagation()
 		}
-		// ;['dragenter', 'dragover'].forEach(eventName => {
-		// 	dropArea.addEventListener(eventName, highlight, false)
-		// })
+		;['dragenter', 'dragover'].forEach(eventName => {
+			dropArea.addEventListener(eventName, highlight, false)
+		})
 
-		// 	;['dragleave', 'drop'].forEach(eventName => {
-		// 		dropArea.addEventListener(eventName, unhighlight, false)
-		// 	})
+			// ;['dragleave', 'drop'].forEach(eventName => {
+			// 	dropArea.addEventListener(eventName, unhighlight, false)
+			// })
 
-		// function highlight(e) {
-		// 	dropArea.classList.add('highlight')
-		// }
+		function highlight(e) {
+			dropArea.classList.add('highlight')
+		}
 
 		// function unhighlight(e) {
 		// 	dropArea.classList.remove('highlight')
@@ -222,12 +225,12 @@ class NewItemPage extends Component {
 
 		let handleFiles = (selectedFiles) => {
 			// ([...files]).forEach(this.multipleFileUploadHandler)
-			this.setState({selectedFiles})
+			this.setState({ selectedFiles })
 			let selectedPhotos = document.getElementById("upload-photo").files
 			selectedPhotos = selectedFiles
 			console.log("Here are the files:", selectedFiles)
 			console.log("Here are the photos:", selectedPhotos)
-			
+
 			this.previewImage(true)
 		}
 		function handleDrop(e) {
@@ -237,7 +240,7 @@ class NewItemPage extends Component {
 			handleFiles(files)
 		}
 
-		
+
 
 		// END DRAG AND DROP
 	}
@@ -247,7 +250,7 @@ class NewItemPage extends Component {
 			<div className="whole-page">
 
 
-				<div id="oc-alert-container"></div>
+				{/* <div id="oc-alert-container"></div> */}
 				<div
 					className="card border-light mb-3 whole-card"
 					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
@@ -259,9 +262,9 @@ class NewItemPage extends Component {
 						</label>
 						{/* <p className="card-text">Please upload the Gallery Images for your gallery</p> */}
 						<input id='upload-photo' type="file" multiple onChange={this.multipleFileChangedHandler} />
-						<div >
+						{/* <div >
 							<p id='reset' onClick={this.refreshPage}>Reset</p>
-						</div>
+						</div> */}
 					</div>
 					<div className="card-body">
 						<div className='form-div'>
@@ -334,7 +337,9 @@ class NewItemPage extends Component {
 					</div>
 
 				</div>
-
+				<div >
+					<p id='reset' onClick={this.refreshPage}>Reset</p>
+				</div>
 				<div className='loading'>Loading...</div>
 			</div>
 		);
