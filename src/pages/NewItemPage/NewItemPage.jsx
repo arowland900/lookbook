@@ -5,7 +5,7 @@ import './NewItemPage.css';
 import camera from '../../../src/camera.png'
 
 class NewItemPage extends Component {
-	
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -40,6 +40,7 @@ class NewItemPage extends Component {
 	};
 
 	multipleFileChangedHandler = (event) => {
+		this.previewImage()
 		this.setState({
 			selectedFiles: event.target.files
 		});
@@ -78,14 +79,28 @@ class NewItemPage extends Component {
 	fadeDivIn = async () => {
 		let div = document.querySelector('.whole-card')
 		// setTimeout(function () {
-			await $(div).fadeIn('slow')
-			$(div).css('display', 'flex')
+		await $(div).fadeIn('slow')
+		$(div).css('display', 'flex')
 		// }, 500)
 
 
 	}
 
+	previewImage = () => {
+		let oFReader = new FileReader();
+		let selectedPhotos = document.getElementById("upload-photo").files
+        oFReader.readAsDataURL(selectedPhotos[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("photo-label-img").src = oFREvent.target.result;
+		};
+		$(document.querySelector('#photo-label')).css('pointer-events', 'none')
+		document.querySelector('h3').innerHTML = `${selectedPhotos.length} Photos Selected`
+		
+    };
+
 	multipleFileUploadHandler = () => {
+
 		this.fadeDiv()
 		const data = new FormData();
 		data.itemInfo = this.state.formData
@@ -161,38 +176,89 @@ class NewItemPage extends Component {
 
 
 				<div id="oc-alert-container"></div>
-				<div 
-					className="card border-light mb-3 whole-card" 
+				<div
+					className="card border-light mb-3 whole-card"
 					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
 				>
 					<div className="card-header">
 						<h3 style={{ color: '#555' }}>Select Up To 8 Images</h3>
 						<label id='photo-label' htmlFor="upload-photo">
-							<img id='photo-label-img' src={camera} alt="" style={{height: '200px', width: 'auto', margin: '0 auto'}}/>
-						 </label>
+							<img id='photo-label-img' src={camera} alt="" style={{ height: '200px', width: 'auto', margin: '0 auto' }} />
+						</label>
 						{/* <p className="card-text">Please upload the Gallery Images for your gallery</p> */}
 						<input id='upload-photo' type="file" multiple onChange={this.multipleFileChangedHandler} />
 
 					</div>
 					<div className="card-body">
-						<p className="card-text">Piece / Outfit</p>
-						<select name="type" onChange={this.handleChange}>
-							<option value="item">Piece</option>
-							<option value="outfit">Outfit</option>
-						</select>
-						<p className="card-text">Season</p>
-						<select name="season" onChange={this.handleChange}>
-							<option value="fw">Fall + Winter</option>
-							<option value="ss">Spring + Summer</option>
-						</select>
-						<p className="card-text">Name</p>
-						<input type="text" name="name" onChange={this.handleChange} />
-						<p className="card-text">Description</p>
-						<textarea type="text" name="description" onChange={this.handleChange} />
-						<div className="mt-5">
+						<div className='form-div'>
+
+							<p className="card-text">Piece / Outfit: </p>
+							<select name="type" onChange={this.handleChange}>
+								<option value="item">Piece</option>
+								<option value="outfit">Outfit</option>
+							</select>
+						</div>
+						{/* <div className='form-div'>
+							<p className="card-text">Type: </p>
+							<select name="type" onChange={this.handleChange}>
+								<option value="shoes">Shoes</option>
+								<option value="top">Top</option>
+							</select>
+						</div> */}
+						<div className='form-div'>
+
+							<p className="card-text" >Season: </p>
+							<select name="season" onChange={this.handleChange}>
+								<option value="fw">Fall + Winter</option>
+								<option value="ss">Spring + Summer</option>
+							</select>
+						</div>
+						<div className='form-div'>
+							<p className="card-text">Name: </p>
+							<input type="text" name="name" onChange={this.handleChange} />
+
+						</div>
+						<div className='form-div'>
+
+							<p className="card-text">Description: </p>
+							<textarea type="text" name="description" onChange={this.handleChange} />
+						</div>
+						<div className="mt-5 form-div">
 							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>
 						</div>
 					</div>
+					<div className="card-body">
+						<div className='form-div'>
+
+							<p className="card-text">Piece / Outfit: </p>
+							<select name="type" onChange={this.handleChange}>
+								<option value="item">Piece</option>
+								<option value="outfit">Outfit</option>
+							</select>
+						</div>
+						<div className='form-div'>
+
+							<p className="card-text">Season: </p>
+							<select name="season" onChange={this.handleChange}>
+								<option value="fw">Fall + Winter</option>
+								<option value="ss">Spring + Summer</option>
+							</select>
+						</div>
+						<div className='form-div'>
+							<p className="card-text">Name: </p>
+							<input type="text" name="name" onChange={this.handleChange} />
+
+						</div>
+						<div className='form-div'>
+
+							<p className="card-text">Description: </p>
+							<textarea type="text" name="description" onChange={this.handleChange} />
+						</div>
+						<div className="mt-5 form-div">
+							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>
+						</div>
+					</div>
+
 				</div>
 				<div className='loading'>Loading...</div>
 			</div>
