@@ -6,6 +6,12 @@
     font-size: 5em;
 }
 
+.whole-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .whole-card{
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(211, 211, 211);
@@ -19,6 +25,7 @@
     display: none;
     justify-content: space-around;
     align-items: center;
+    /* min-width: 800px; */
 }
 
 /* h3 {
@@ -27,6 +34,10 @@
 } */
 
 .card-header {
+    min-width: 276.88px;
+    min-height: 262.44px;
+    max-width: 276.88px;
+    max-height: 262.44px;
     /* max-width: 250px; */
     /* width: 500px; */
     display: flex;
@@ -57,6 +68,24 @@
     -ms-transition: all .3s ease;
     transition: all .3s ease;
     /* background-color: chartreuse; */
+}
+
+.fadeOut {
+    -webkit-filter: opacity(0);
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.fadeIn {
+    -webkit-filter: opacity(1);
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
 }
 
 #photo-label-img:hover {
@@ -90,3 +119,13 @@ textarea {
     margin-top: 16px;
     height: 20px
 } */
+
+
+.NewPageItem-center-cropped {
+    /* background: #eee url(http://www.google.co.cr/logos/classicplus.png) center center; */
+    width: 50px;
+    height:50px;
+    /* border: 1px solid red; */
+    text-indent: -9999px;
+    object-fit: cover;
+}

@@ -40,11 +40,11 @@ class NewItemPage extends Component {
 	};
 
 	multipleFileChangedHandler = (event) => {
-		this.previewImage()
 		this.setState({
 			selectedFiles: event.target.files
 		});
-		console.log(event.target.files);
+		this.previewImage()
+		console.log("Selected Files: ", event.target.files);
 	};
 
 	ocShowAlert = (message, background = '#3089cf') => {
@@ -87,15 +87,28 @@ class NewItemPage extends Component {
 	}
 
 	previewImage = () => {
+		$(document.querySelector('#photo-label')).css('pointer-events', 'none')
+		let cardHead = document.querySelector('.card-header')
+		cardHead.classList.add('fadeOut')
+		
 		let oFReader = new FileReader();
 		let selectedPhotos = document.getElementById("upload-photo").files
-        oFReader.readAsDataURL(selectedPhotos[0]);
-
-        oFReader.onload = function (oFREvent) {
-            document.getElementById("photo-label-img").src = oFREvent.target.result;
-		};
-		$(document.querySelector('#photo-label')).css('pointer-events', 'none')
-		document.querySelector('h3').innerHTML = `${selectedPhotos.length} Photos Selected`
+		
+		setTimeout(() =>{
+			oFReader.readAsDataURL(selectedPhotos[0]);
+			
+			oFReader.onload =  function (oFREvent) {
+				let img = document.getElementById("photo-label-img")
+				img.classList.add('NewPageItem-center-cropped')
+				img.src = oFREvent.target.result;
+				
+			};
+		},500)
+		setTimeout(function(){
+			cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
+			cardHead.classList.remove('fadeOut')
+			cardHead.classList.add('fadeIn')
+		}, 1000)
 		
     };
 
@@ -172,7 +185,7 @@ class NewItemPage extends Component {
 
 	render() {
 		return (
-			<div className="GamePage">
+			<div className="whole-page">
 
 
 				<div id="oc-alert-container"></div>
@@ -181,9 +194,9 @@ class NewItemPage extends Component {
 					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
 				>
 					<div className="card-header">
-						<h3 style={{ color: '#555' }}>Select Up To 8 Images</h3>
-						<label id='photo-label' htmlFor="upload-photo">
-							<img id='photo-label-img' src={camera} alt="" style={{ height: '200px', width: 'auto', margin: '0 auto' }} />
+						<h3 style={{ color: '#555', display:'block' }}>Select Up To 8 Images</h3>
+						<label id='photo-label' style={{width:'200px', height: '200px'}} htmlFor="upload-photo">
+							<img id='photo-label-img' src={camera} alt="" style={{ height: '200px', width: '200px', margin: '0 auto', objectFit:'cover' }} />
 						</label>
 						{/* <p className="card-text">Please upload the Gallery Images for your gallery</p> */}
 						<input id='upload-photo' type="file" multiple onChange={this.multipleFileChangedHandler} />
