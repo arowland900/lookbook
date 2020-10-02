@@ -25,3 +25,10 @@
     margin-left: 5em;
     margin-right: 5em
 } */
+
+@media screen and (max-width: 780px) {
+	.center-cropped {
+        width: calc(96vw/3);
+        height: calc(96vw/3);
+    }
+}

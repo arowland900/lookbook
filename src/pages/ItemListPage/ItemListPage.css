@@ -1,17 +1,33 @@
 .PuppyListPage-grid {
-  /* width: 80%; */
-  margin: '0 auto';
-  /* padding: 20px; */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-column-gap: 5px;
-  grid-row-gap: 1px;
-  align-items: center;
-  justify-items: center;
+	/* width: 80%; */
+	margin: '0 auto';
+	/* padding: 20px; */
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-column-gap: 5px;
+	grid-row-gap: 1px;
+	align-items: center;
+	justify-items: center;
 }
 
 .my-closet {
-  padding-left: 10vw;
-  padding-right: 10vw;
-  display: none;
+	padding-left: .5vw;
+	padding-right: .5vw;
+	display: none;
+	max-width: 1019.22px;
+}
+
+@media screen and (max-width: 1025px) {
+	.my-closet {
+		max-width: 769.25px;
+	}
+}
+
+@media screen and (max-width: 775) {
+	.my-closet {
+		max-width: calc(99vw/3);
+	}
+	.PuppyListPage-grid{
+		grid-template-columns: repeat(auto-fit, minmax(10 0px, 1fr));
+	}
 }
