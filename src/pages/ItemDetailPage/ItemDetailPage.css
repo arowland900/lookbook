@@ -14,10 +14,12 @@ img {
     border: 1px solid red;
     text-indent: -9999px;
     object-fit: cover;
-    margin: .1em
+    margin-top: .1em;
+    margin-right: .1em
 }
 
 .imgHolder {
+   
     /* display: flex;
     justify-content: center; */
     grid-template-areas: "main main main main main main main main main main" 
@@ -26,8 +28,23 @@ img {
     grid-gap: 2em;
 }
 
+.imgSquare {
+    height: 510px;
+    width: 510px;
+    background-color: rgb(247, 247, 218);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .mainImg {
     grid-area: main;
+    /* top: -50%;
+    left: -50%;
+    bottom: -50%;
+    right: -50%;
+    position: absolute; */
 }
 
 .tiny0 {

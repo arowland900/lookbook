@@ -20,19 +20,19 @@ const NavBar = (props) => {
 			<Link 
 				to='/items' 
 				// className='NavBar-link'
-				className={currentPage == '/items' ? 'NavBar-link active' : 'NavBar-link'}
+				className={currentPage === '/items' ? 'NavBar-link active' : 'NavBar-link'}
 			>My Closet</Link>
       		&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 			<Link 
 				to='/new' 
 				// className='NavBar-link'
-				className={currentPage == '/new' ? 'NavBar-link active' : 'NavBar-link'}
+				className={currentPage === '/new' ? 'NavBar-link active' : 'NavBar-link'}
 			>New Piece / Outfit</Link>
       		&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 			<Link 
 				to='/' 
 				// className='NavBar-link' 
-				className={currentPage == '/' ? ' NavBar-link active' : 'NavBar-link'}
+				className={currentPage === '/' ? ' NavBar-link active' : 'NavBar-link'}
 			>Home</Link>
 			</div>
 			:
@@ -40,13 +40,13 @@ const NavBar = (props) => {
 				<Link 
 					to='/login' 
 					// className='NavBar-link'
-					className={currentPage == '/login' ? 'NavBar-link active' : 'NavBar-link'}
+					className={currentPage === '/login' ? 'NavBar-link active' : 'NavBar-link'}
 				>Log In</Link>
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<Link 
 					to='/signup' 
 					// className='NavBar-link'
-					className={currentPage == '/signup' ? 'NavBar-link active' : 'NavBar-link'}
+					className={currentPage === '/signup' ? 'NavBar-link active' : 'NavBar-link'}
 				>Sign Up</Link>
 			</div>
 

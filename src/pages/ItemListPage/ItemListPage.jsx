@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch,Link} from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
+import { Link} from 'react-router-dom';
 import $ from 'jquery';
 import SingleItem from '../../components/SingleItem/SingleItem'
 import './ItemListPage.css';
@@ -16,18 +15,13 @@ class ItemPage extends Component {
 
 	fadeDiv = () => {
 		let div = document.querySelector('.my-closet')
-			// setTimeout(function(){
-				$(div).fadeIn('slow')
-				
-			// }, 500)
-		
-			
+		$(div).fadeIn('slow')
 	}
 
 		/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
-			await this.fadeDiv()
+		await this.fadeDiv()
 	}
 
 	render() {
