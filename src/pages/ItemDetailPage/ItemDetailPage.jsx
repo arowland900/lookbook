@@ -16,11 +16,14 @@ class ItemDetailPage extends Component {
 	}
 
 	resize = (i,el) => {
+		console.log("hitting resize")
 		let mainImg = document.querySelector(i)
-		if (mainImg.height > mainImg.width) {
+		if (mainImg.height + 50 > mainImg.width) {
+			console.log('taller')
 			$(mainImg).css('height', 500)
 			$(mainImg).css('width', 'auto')
 		} else {
+			console.log('wider')
 			$(mainImg).css('width', 550)
 			$(mainImg).css('height', 'auto')
 		}
@@ -30,6 +33,10 @@ class ItemDetailPage extends Component {
 	}
 
 	changeImg = async (e, clickOne, clickTwo) => {
+		console.log("Hitting")
+		console.log("e: ", e)
+		console.log("clickOne: ", clickOne)
+		console.log("clickTwo: ", clickTwo)
 		// function had to run multiple times to properly resize image on click
 		if (clickTwo) return
 		// get siblings of element (all other images) and make them not selected
@@ -71,6 +78,9 @@ class ItemDetailPage extends Component {
 			}
 
 		}
+		console.log("ITEM: ", item)
+		console.log("STATE: ", this.state)
+		// await this.changeImg()
 	}
 
 	render() {
