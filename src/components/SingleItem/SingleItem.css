@@ -35,8 +35,8 @@
 
 @media screen and (max-width: 620px) {
 	.center-cropped {
-        width: calc(96vw/3);
-        height: calc(96vw/3);
+        width: calc(93vw/3);
+        height: calc(93vw/3);
         /* max-width: 150px;
         max-height: 150px;
         min-width: 50px;

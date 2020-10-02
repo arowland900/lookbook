@@ -16,6 +16,7 @@ class ItemPage extends Component {
 	fadeDiv = () => {
 		let div = document.querySelector('.my-closet')
 		$(div).fadeIn('slow')
+		// div.style.display = 'flex'
 	}
 
 		/*--- Lifecycle Methods ---*/
