@@ -8,32 +8,32 @@ const NavBar = (props) => {
 
 	// console.log(props.user)
 	let nav = props.user ?
-		<div>
+		<div id='nav-holder'>
 			{/* <span className='NavBar-welcome' style={{fontWeight: '900'}}>{props.user.name}</span> */}
       		{/* &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; */}
 			<Link 
 				to='/' 
 				className='NavBar-link' 
 				onClick={props.handleLogout}
-			>Log Out</Link>
-      		&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			>Log Out </Link>
+      		
 			<Link 
 				to='/items' 
 				// className='NavBar-link'
 				className={currentPage === '/items' ? 'NavBar-link active' : 'NavBar-link'}
-			>My Closet</Link>
-      		&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			>&nbsp;&nbsp;My Closet</Link>
+      		
 			<Link 
 				to='/new' 
 				// className='NavBar-link'
 				className={currentPage === '/new' ? 'NavBar-link active' : 'NavBar-link'}
-			>New Piece / Outfit</Link>
-      		&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			>&nbsp;&nbsp;New Piece / Outfit </Link>
+      		
 			<Link 
 				to='/' 
 				// className='NavBar-link' 
 				className={currentPage === '/' ? ' NavBar-link active' : 'NavBar-link'}
-			>Home</Link>
+			>&nbsp;&nbsp;Home</Link>
 			</div>
 			:
 			<div>

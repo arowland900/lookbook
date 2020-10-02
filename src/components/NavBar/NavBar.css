@@ -11,3 +11,20 @@
 .NavBar-welcome {
     color: grey;
 }
+
+.pBar {
+    color: black !important;
+}
+
+@media screen and (max-width: 465px) {
+    #nav-holder {
+        width: 300px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .NavBar-link {
+        margin-bottom: 5px;
+    }
+
+}
