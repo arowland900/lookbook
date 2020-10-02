@@ -52,19 +52,21 @@ class NewItemPage extends Component {
 		console.log("Selected Files: ", event.target.files);
 	};
 
-	ocShowAlert = (message, background = '#3089cf') => {
+	ocShowAlert = (message) => {
 		let alertContainer = document.getElementById('reset')
 		alertContainer.style.display = 'inline'
 		alertContainer.textContent = message
-		// let alertContainer = document.querySelector('#reset'),
-		// alertEl = document.createElement('div'),
-		// textNode = document.createTextNode(message);
-		// $(alertEl).css('background', background);
-		// alertEl.appendChild(textNode);
-		// alertContainer.appendChild(textNode);
-		setTimeout(function () {
-			$(alertContainer).fadeOut(1000);
-			// $(alertEl).remove();
+		setTimeout( () =>{
+			$(alertContainer).fadeOut(1000)
+
+
+		}, 3000);
+		setTimeout(() => {
+			$(alertContainer).fadeIn(1000)
+		}, 1000);
+		setTimeout(() => {
+			document.getElementById('reset').style.display = 'inline'
+			document.getElementById('reset').textContent = 'Reset'
 		}, 5000);
 	};
 
@@ -94,7 +96,9 @@ class NewItemPage extends Component {
 	}
 
 	previewImage = (drag) => {
-		$(document.querySelector('#photo-label')).css('pointer-events', 'none')
+		let invalid = false
+		let photoLabel = $(document.querySelector('#photo-label'))
+		photoLabel.css('pointer-events', 'none')
 		let cardHead = document.querySelector('.card-header')
 		cardHead.classList.add('fadeOut')
 
@@ -109,26 +113,38 @@ class NewItemPage extends Component {
 		setTimeout(() => {
 			oFReader.readAsDataURL(selectedPhotos[0]);
 
-			oFReader.onload = function (oFREvent) {
+			oFReader.onload = (oFREvent) => {
 				let img = document.getElementById("photo-label-img")
 				img.classList.add('NewPageItem-center-cropped')
-				img.src = oFREvent.target.result;
+				if (oFREvent.target.result[5] == 'i') {
+
+					img.src = oFREvent.target.result;
+				} else {
+					invalid = true
+					this.ocShowAlert('Please Select an Image')
+				}
+				console.log(img.src[5])
 
 			};
 		}, 500)
 		setTimeout(function () {
-			cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
-			if (selectedPhotos.length > 8) {
-				cardHead.childNodes[0].style.color = 'red'
-				document.getElementById('reset').style.display = 'block'
+			if (!invalid) {
+				cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
+				if (selectedPhotos.length > 8) {
+					cardHead.childNodes[0].style.color = 'red'
+					document.getElementById('reset').style.display = 'inline'
+					document.getElementById('reset').textContent = 'Reset'
+				}
+				cardHead.classList.remove('fadeOut')
+				cardHead.classList.add('fadeIn')
+				document.getElementById('reset').style.display = 'inline'
 				document.getElementById('reset').textContent = 'Reset'
+			} else {
+				photoLabel.css('pointer-events', '')
+				cardHead.classList.remove('fadeOut')
+				cardHead.classList.add('fadeIn')
 			}
-			cardHead.classList.remove('fadeOut')
-			cardHead.classList.add('fadeIn')
-			document.getElementById('reset').style.display = 'block'
-			document.getElementById('reset').textContent = 'Reset'
 		}, 1000)
-
 	};
 
 	multipleFileUploadHandler = () => {
@@ -340,7 +356,7 @@ class NewItemPage extends Component {
 
 				</div>
 				<div >
-					<p id='reset' style={{cursor: 'pointer', width: '20px'}} onClick={this.refreshPage}>Reset</p>
+					<p id='reset' style={{ cursor: 'pointer', width: '20px' }} onClick={this.refreshPage}>Reset</p>
 				</div>
 				<div className='loading'>Loading...</div>
 			</div>
