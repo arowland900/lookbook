@@ -1,65 +1,71 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import $, { css } from 'jquery';
 import './ItemDetailPage.css';
 
 class ItemDetailPage extends Component {
 
 	state = {
 		item: '',
-		currentImg: ''
+		currentImg: '',
+		allImgs: []
 	}
-
 
 	fadeDiv = () => {
 		let div = document.querySelector('.itemDetailPage')
 		$(div).fadeIn('slow')
 	}
 
-	resize = () => {
-		let mainImg = document.querySelector('.mainImg')
-		console.log('MAIN IMG HEIGHT: ', mainImg.height)
-		if(mainImg.height > mainImg.width){
+	resize = (i,el) => {
+		let mainImg = document.querySelector(i)
+		if (mainImg.height > mainImg.width) {
 			$(mainImg).css('height', 500)
 			$(mainImg).css('width', 'auto')
 		} else {
 			$(mainImg).css('width', 500)
 			$(mainImg).css('height', 'auto')
 		}
+		if(el){
+			mainImg.src = el.src
+		}
 	}
 
-	changeImg = (e) => {
+	changeImg = async (e, clickOne, clickTwo) => {
+		// function had to run multiple times to properly resize image on click
+		if (clickTwo) return
+		// get siblings of element (all other images) and make them not selected
 		let siblings = e.target.parentNode.children
 		let el = e.target
-		console.log(e.target.src)
-		for(let i = 0; i < siblings.length; i++){
+		// console.log(siblings)
+		for (let i = 0; i < siblings.length; i++) {
 			siblings[i].classList.add('not-selected')
 		}
+		// get clicked element and make it the selected one
 		el.classList.remove('not-selected')
+		el.classList.add('selected')
 
-		this.setState({currentImg: el.src})
-		console.log("state: ", this.state)
-		let img = document.querySelector('.imgSquare img')
-		console.log(img)
-		img.src = el.src
+		this.setState({ currentImg: el.src })
+		this.resize('.imgSquare img', el)
+		// first recursive statement
+		if(!clickOne) this.changeImg(e, true)
+		// second recursive statement to ultimately break the loop
+		if(clickOne && !clickTwo) this.changeImg(e, true, true)
 	}
 
 	/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
 		let item = await this.props.location.state.item
-		let currentImg = item.photos[0]
+		let currentImg = this.state.currentImg ? this.state.currentImg : item.photos[0]
 		this.setState({ item, currentImg })
-		console.log("RE MOUNTED ItemDetailPage", this.state)
-		await this.resize()
-		// console.log("STATE: ", this.state)
+		await this.resize('.mainImg')
 		await this.fadeDiv()
-
 	}
+
 	render() {
-		let img = this.state.item 
-		? <img src={this.state.item.photos[0]} alt="" className='mainImg' />
-		: ''
-		// console.log("IMG: ", img)
+
+		let img = this.state.item
+			? <img src={this.state.item.photos[0]} alt="" className='mainImg' />
+			: ''
 
 		return (
 			<div className='itemDetailPage'>
@@ -80,7 +86,7 @@ BUT SET A MAXIMUM SIZE --- https://www.grailed.com/listings/16820170-iron-heart-
 							<div className="carousel">
 								{this.state.item.photos.map((p, i) => {
 									return <img src={p} alt="" key={i} onClick={this.changeImg} className={`ItemDetailPage-center-cropped tiny${i} ${!i ? '' : 'not-selected'}`} />
-							
+
 
 								})}
 							</div>

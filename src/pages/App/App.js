@@ -81,7 +81,6 @@ class App extends Component {
 		// 	// debugger
 			
 		// })
-		console.log('here is user: ', userService.getUser())
 		let user = userService.getUser()
 		if (user) {
 			const items = await fetch('/api/items', {
@@ -97,7 +96,6 @@ class App extends Component {
 		} else {
 			console.log("no user logged in")
 		}
-		console.log(this.state.items)
 	}
 
 
