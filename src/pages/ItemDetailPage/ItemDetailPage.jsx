@@ -33,6 +33,7 @@ class ItemDetailPage extends Component {
 		let item = await this.props.location.state.item
 		let currentImg = item.photos[0]
 		this.setState({ item, currentImg })
+		console.log("RE MOUNTED ItemDetailPage", this.state)
 		await this.resize()
 		// console.log("STATE: ", this.state)
 		await this.fadeDiv()

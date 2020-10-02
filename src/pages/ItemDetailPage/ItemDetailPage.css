@@ -18,8 +18,16 @@ img {
     margin-right: .1em
 }
 
+.infoHolder {
+    height: 500px;
+    width: 500px;
+    /* display: flex;
+    justify-content: flex-start; */
+    background-color: rgb(247, 231, 218);
+}
+
 .imgHolder {
-   
+   background-color: lightgreen;
     /* display: flex;
     justify-content: center; */
     grid-template-areas: "main main main main main main main main main main" 
@@ -29,8 +37,8 @@ img {
 }
 
 .imgSquare {
-    height: 510px;
-    width: 510px;
+    height: 500px;
+    width: 500px;
     background-color: rgb(247, 247, 218);
     display: flex;
     justify-content: center;
@@ -85,10 +93,7 @@ img {
     padding-right: 20em;
 }
 
-infoHolder {
-    display: flex;
-    justify-content: flex-start;
-}
+
 
 .mainCard {
     margin: '0 auto';

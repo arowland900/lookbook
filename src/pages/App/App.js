@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import $ from 'jquery';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import HomePage from '../../pages/HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -18,7 +19,8 @@ class App extends Component {
 		super();
 		this.state = {
 			user: userService.getUser(),
-			items: []
+			items: [],
+			// reloaded: false
 		};
 	}
 
@@ -26,7 +28,7 @@ class App extends Component {
 
 
 	/*--- Callback Methods ---*/
-
+	
 	
 
 	getItem = (idx) => {
@@ -71,6 +73,14 @@ class App extends Component {
 	/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
+		this.state.reloaded = false
+		// window.addEventListener('beforeunload', function(e){
+		// 	console.log('hello!')
+		// 	// debugger
+		// 	this.state.reloaded = true
+		// 	// debugger
+			
+		// })
 		console.log('here is user: ', userService.getUser())
 		let user = userService.getUser()
 		if (user) {
@@ -92,6 +102,9 @@ class App extends Component {
 
 
 	render() {
+		// if(this.state.reloaded){
+		// 	return <Redirect to='/' />
+		// }
 		return (
 			<div>
 				<header className='header-footer'>L O O K &nbsp;&nbsp;&nbsp;  B O O K</header>
