@@ -9,8 +9,8 @@ const NavBar = (props) => {
 	// console.log(props.user)
 	let nav = props.user ?
 		<div>
-			<span className='NavBar-welcome'>Welcome {props.user.name}!</span>
-      		&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			{/* <span className='NavBar-welcome' style={{fontWeight: '900'}}>{props.user.name}</span> */}
+      		{/* &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; */}
 			<Link 
 				to='/' 
 				className='NavBar-link' 

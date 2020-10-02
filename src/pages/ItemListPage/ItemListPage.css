@@ -45,3 +45,21 @@
 		padding-right: .5vw;
 	}
 }
+
+@media screen and (max-width: 470px) {
+
+
+	.my-closet{
+		padding-left: 1.3vw;
+		padding-right: .5vw;
+	}
+}
+
+@media screen and (max-width: 320px) {
+
+
+	.my-closet{
+		padding-left: 2.5vw;
+		padding-right: .5vw;
+	}
+}
