@@ -340,7 +340,7 @@ class NewItemPage extends Component {
 
 				</div>
 				<div >
-					<p id='reset' onClick={this.refreshPage}>Reset</p>
+					<p id='reset' style={{cursor: 'pointer', width: '20px'}} onClick={this.refreshPage}>Reset</p>
 				</div>
 				<div className='loading'>Loading...</div>
 			</div>
