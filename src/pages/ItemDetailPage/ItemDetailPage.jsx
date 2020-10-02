@@ -84,11 +84,17 @@ BUT SET A MAXIMUM SIZE --- https://www.grailed.com/listings/16820170-iron-heart-
 							</div>
 
 							<div className="carousel">
-								{this.state.item.photos.map((p, i) => {
+								{/* <div> */}
+
+								{
+							
+								this.state.item.photos.map((p, i) => {
 									return <img src={p} alt="" key={i} onClick={this.changeImg} className={`ItemDetailPage-center-cropped tiny${i} ${!i ? '' : 'not-selected'}`} />
-
-
+									
+									
 								})}
+								
+								{/* </div> */}
 							</div>
 						</div>
 					</div>

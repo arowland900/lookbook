@@ -14,13 +14,14 @@ img {
     border: 1px solid red;
     text-indent: -9999px;
     object-fit: cover;
-    margin-top: .1em;
-    margin-right: .1em
+    margin-top: .25em;
+    /* margin-right: .25vw;
+    margin-left: .25vw */
 }
 
 .infoHolder {
     height: 566.59px;
-    width: 500px;
+    width: 550px;
     min-width: 500px;
     /* display: flex;
     justify-content: flex-start; */
@@ -34,12 +35,11 @@ img {
     grid-template-areas: "main main main main main main main main main main" 
                          "tiny0 tiny1 tiny2 tiny3 tiny4 tiny5 tiny6 tiny1 tiny8 tiny9" ;
     grid-template-rows: 50px 1fr 30px;
-    grid-gap: 2em;
 }
 
 .imgSquare {
     height: 500px;
-    width: 500px;
+    width: 550px;
     background-color: rgb(247, 247, 218);
     display: flex;
     justify-content: center;
@@ -100,6 +100,8 @@ img {
 
 .carousel {
     background-color: white;
+    display:flex;
+    justify-content: space-between;
 }
 
 .mainCard {
