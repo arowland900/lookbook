@@ -8,9 +8,57 @@ img {
     margin: 0 auto;
 } */
 
+.ItemDetailPage-center-cropped {
+    width: 60px;
+    height:60px;
+    border: 1px solid red;
+    text-indent: -9999px;
+    object-fit: cover;
+    margin: .1em
+}
+
 .imgHolder {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
+    grid-template-areas: "main main main main main main main main main main" 
+                         "tiny0 tiny1 tiny2 tiny3 tiny4 tiny5 tiny6 tiny1 tiny8 tiny9" ;
+    grid-template-rows: 50px 1fr 30px;
+    grid-gap: 2em;
+}
+
+.mainImg {
+    grid-area: main;
+}
+
+.tiny0 {
+    grid-area: tiny0;
+}
+.tiny1 {
+    grid-area: tiny1;
+}
+.tiny2 {
+    grid-area: tiny2;
+}
+.tiny3 {
+    grid-area: tiny3;
+}
+.tiny4 {
+    grid-area: tiny4;
+}
+.tiny5 {
+    grid-area: tiny5;
+}
+.tiny6 {
+    grid-area: tiny6;
+}
+.tiny7 {
+    grid-area: tiny7;
+}
+.tiny8 {
+    grid-area: tiny8;
+}
+.tiny9 {
+    grid-area: tiny9;
 }
 
 .itemDetailPage {

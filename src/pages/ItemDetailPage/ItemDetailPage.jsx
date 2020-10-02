@@ -26,7 +26,7 @@ class ItemDetailPage extends Component {
   componentDidMount = async () => {
     let item = await this.props.location.state.item
     this.setState({ item })
-    // GET ALL ITEM INFO IN HERE TO DISPLAY ON PAGE
+    console.log("ITEM: ", item)
     await this.fadeDiv()
 
   }
@@ -42,7 +42,13 @@ BUT SET A MAXIMUM SIZE --- https://www.grailed.com/listings/16820170-iron-heart-
               <p>{this.state.item.description}</p>
             </div>
             <div className='imgHolder'>
-              <img src={this.state.item.photos[0]} alt="" />
+              <img src={this.state.item.photos[0]} alt="" className='mainImg'/>
+      
+              <div className="carousel">
+                {this.state.item.photos.map((p, i) => {
+                  return <img src={p} alt="" className={`ItemDetailPage-center-cropped tiny${i}`}/>
+                })}
+              </div>
             </div>
           </div>
           :
