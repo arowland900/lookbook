@@ -91,14 +91,19 @@ class NewItemPage extends Component {
 
 	}
 
-	previewImage = () => {
+	previewImage = (drag) => {
 		$(document.querySelector('#photo-label')).css('pointer-events', 'none')
 		let cardHead = document.querySelector('.card-header')
 		cardHead.classList.add('fadeOut')
 
 		let oFReader = new FileReader();
-		let selectedPhotos = document.getElementById("upload-photo").files
-
+		let selectedPhotos
+		if(drag){
+			selectedPhotos = this.state.selectedFiles
+		} else {
+			selectedPhotos = document.getElementById("upload-photo").files
+		}
+		console.log("selected Photos: ", selectedPhotos)
 		setTimeout(() => {
 			oFReader.readAsDataURL(selectedPhotos[0]);
 
@@ -111,8 +116,8 @@ class NewItemPage extends Component {
 		}, 500)
 		setTimeout(function () {
 			cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
-			if (selectedPhotos.length > 8){
-				cardHead.childNodes[0].style.color ='red'
+			if (selectedPhotos.length > 8) {
+				cardHead.childNodes[0].style.color = 'red'
 				document.getElementById('reset').style.display = 'block'
 			}
 			cardHead.classList.remove('fadeOut')
@@ -126,18 +131,16 @@ class NewItemPage extends Component {
 		this.fadeDiv()
 		const data = new FormData();
 		data.itemInfo = this.state.formData
-		console.log("THIS IS DATA: ", data)
 		let selectedFiles = this.state.selectedFiles;
-		console.log('hitting multFileUpload')
 
 		// If file selected
 		if (selectedFiles) {
 			for (let i = 0; i < selectedFiles.length; i++) {
 				data.append('galleryImage', selectedFiles[i], selectedFiles[i].name);
 			}
-			data.append('name', this.state.formData.name)
-			data.append('description', this.state.formData.description)
-			console.log("data being sent: ", data)
+			// data.append('name', this.state.formData.name)
+			// data.append('description', this.state.formData.description)
+			// console.log("data being sent: ", data)
 			axios.post('/api/items/multiple-file-upload', data, {
 				headers: {
 					'accept': 'application/json',
@@ -190,6 +193,53 @@ class NewItemPage extends Component {
 	componentDidMount = async () => {
 		console.log(camera)
 		await this.fadeDivIn()
+
+		// ALLOW DRAG AND DROP
+		let dropArea = document.getElementById('photo-label')
+			;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+				dropArea.addEventListener(eventName, preventDefaults, false)
+			})
+		function preventDefaults(e) {
+			e.preventDefault()
+			e.stopPropagation()
+		}
+		// ;['dragenter', 'dragover'].forEach(eventName => {
+		// 	dropArea.addEventListener(eventName, highlight, false)
+		// })
+
+		// 	;['dragleave', 'drop'].forEach(eventName => {
+		// 		dropArea.addEventListener(eventName, unhighlight, false)
+		// 	})
+
+		// function highlight(e) {
+		// 	dropArea.classList.add('highlight')
+		// }
+
+		// function unhighlight(e) {
+		// 	dropArea.classList.remove('highlight')
+		// }
+		dropArea.addEventListener('drop', handleDrop, false)
+
+		let handleFiles = (selectedFiles) => {
+			// ([...files]).forEach(this.multipleFileUploadHandler)
+			this.setState({selectedFiles})
+			let selectedPhotos = document.getElementById("upload-photo").files
+			selectedPhotos = selectedFiles
+			console.log("Here are the files:", selectedFiles)
+			console.log("Here are the photos:", selectedPhotos)
+			
+			this.previewImage(true)
+		}
+		function handleDrop(e) {
+			let dt = e.dataTransfer
+			let files = dt.files
+
+			handleFiles(files)
+		}
+
+		
+
+		// END DRAG AND DROP
 	}
 
 	render() {
