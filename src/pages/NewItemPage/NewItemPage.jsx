@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import './NewItemPage.css';
+import camera from '../../../src/camera.png'
 
 class NewItemPage extends Component {
-
+	
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -150,6 +151,7 @@ class NewItemPage extends Component {
 	/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
+		console.log(camera)
 		await this.fadeDivIn()
 	}
 
@@ -164,12 +166,12 @@ class NewItemPage extends Component {
 					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
 				>
 					<div className="card-header">
-						<h3 style={{ color: '#555', marginLeft: '12px' }}>Upload Muliple Images</h3>
-						{/* <p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 400px x 400px ( Max 2MB )</p> */}
-					</div>
-					<div className="card-body">
+						<h3 style={{ color: '#555' }}>Select Up To 8 Images</h3>
+						<label id='photo-label' htmlFor="upload-photo">
+							<img id='photo-label-img' src={camera} alt="" style={{height: '200px', width: 'auto', margin: '0 auto'}}/>
+						 </label>
 						{/* <p className="card-text">Please upload the Gallery Images for your gallery</p> */}
-						<input type="file" multiple onChange={this.multipleFileChangedHandler} />
+						<input id='upload-photo' type="file" multiple onChange={this.multipleFileChangedHandler} />
 
 					</div>
 					<div className="card-body">
