@@ -45,8 +45,24 @@ class NewItemPage extends Component {
 	};
 
 	multipleFileChangedHandler = (event) => {
+		console.log('hitting file selector')
+		let selectedFiles = event.target.files
+		let invalidFiles = false
+		for(let i = 0; i < selectedFiles.length; i++){
+			if(!selectedFiles[0].type.includes('image')){
+				invalidFiles = true
+			}
+		}
+		if(invalidFiles){
+
+			this.ocShowAlert('Please Only Select Photos')
+			selectedFiles = []
+			this.setState({selectedFiles })
+			document.getElementById("upload-photo").value = ''
+			return
+		}
 		this.setState({
-			selectedFiles: event.target.files
+			selectedFiles
 		});
 		this.previewImage()
 		console.log("Selected Files: ", event.target.files);
@@ -116,19 +132,18 @@ class NewItemPage extends Component {
 			oFReader.onload = (oFREvent) => {
 				let img = document.getElementById("photo-label-img")
 				img.classList.add('NewPageItem-center-cropped')
-				if (oFREvent.target.result[5] == 'i') {
+				// if (oFREvent.target.result[5] == 'i') {
 
 					img.src = oFREvent.target.result;
-				} else {
-					invalid = true
-					this.ocShowAlert('Please Select an Image')
-				}
-				console.log(img.src[5])
+				// } else {
+				// 	return
+				// }
+				// console.log(img.src[5])
 
 			};
 		}, 500)
 		setTimeout(function () {
-			if (!invalid) {
+			// if (!invalid) {
 				cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
 				if (selectedPhotos.length > 8) {
 					cardHead.childNodes[0].style.color = 'red'
@@ -139,11 +154,11 @@ class NewItemPage extends Component {
 				cardHead.classList.add('fadeIn')
 				document.getElementById('reset').style.display = 'inline'
 				document.getElementById('reset').textContent = 'Reset'
-			} else {
+			// } else {
 				photoLabel.css('pointer-events', '')
 				cardHead.classList.remove('fadeOut')
 				cardHead.classList.add('fadeIn')
-			}
+			// }
 		}, 1000)
 	};
 
