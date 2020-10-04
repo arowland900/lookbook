@@ -4,7 +4,7 @@ import $ from 'jquery';
 import './NewItemPage.css';
 import camera from '../../../src/camera.png'
 import { Link } from 'react-router-dom';
-import { ReactSelectize, SimpleSelect, MultiSelect } from 'react-selectize';
+// import { ReactSelectize, SimpleSelect, MultiSelect } from 'react-selectize';
 
 
 class NewItemPage extends Component {
@@ -41,21 +41,21 @@ class NewItemPage extends Component {
 
 	handleChange = e => {
 		console.log("hitting handle change!")
-		if (e.target) {
+		// if (e.target) {
 			const formData = { ...this.state.formData, [e.target.name]: e.target.value };
 			this.setState({
 				formData,
 				// invalidForm: !this.formRef.current.checkValidity()
 			});
-		} else {
-			console.log("handleChange else e: ", e)
-			let values = e.map(c => c.value)
-			const formData = { ...this.state.formData, items: values};
-			this.setState({
-				formData,
-				// invalidForm: !this.formRef.current.checkValidity()
-			});
-		}
+		// } else {
+		// 	console.log("handleChange else e: ", e)
+		// 	let values = e.map(c => c.value)
+		// 	const formData = { ...this.state.formData, items: values};
+		// 	this.setState({
+		// 		formData,
+		// 		// invalidForm: !this.formRef.current.checkValidity()
+		// 	});
+		// }
 		console.log(this.state.formData)
 	};
 
@@ -289,7 +289,7 @@ class NewItemPage extends Component {
 			handleFiles(files)
 		}
 		console.log(this.state)
-		document.querySelector('.resizable-input').style.display = 'none'
+		// document.querySelector('.resizable-input').style.display = 'none'
 
 		// END DRAG AND DROP
 	}
@@ -361,7 +361,7 @@ class NewItemPage extends Component {
 
 								}
 							</select> */}
-							{this.state.items ? 
+							{/* {this.state.items ? 
 							
 							<MultiSelect
 								placeholder="Select Pieces"
@@ -372,7 +372,7 @@ class NewItemPage extends Component {
 							/>
 							:
 							'loading'
-							}
+							} */}
 						</div>
 						<div className='form-div'>
 							<p className="card-text">Color: </p>
