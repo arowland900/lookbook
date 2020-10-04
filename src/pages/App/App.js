@@ -147,6 +147,7 @@ class App extends Component {
 							<NewItemPage
 								history={history}
 								user={this.state.user}
+								items={this.state.items}
 								handleLogout={this.handleLogout}
 								handleAddItem={this.handleAddItem}
 							/>

@@ -10,15 +10,18 @@ class NewItemPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			items: null,
 			selectedFile: null,
 			selectedFiles: null,
 			invalidForm: true,
 			formData: {
+				photos: '',
 				name: '',
 				description: '',
-				photos: '',
+				tags: '',
+				items: '',
 				type: '',
-				season: ''
+				color: '',
 			}
 		}
 	}
@@ -48,16 +51,16 @@ class NewItemPage extends Component {
 		console.log('hitting file selector')
 		let selectedFiles = event.target.files
 		let invalidFiles = false
-		for(let i = 0; i < selectedFiles.length; i++){
-			if(!selectedFiles[0].type.includes('image')){
+		for (let i = 0; i < selectedFiles.length; i++) {
+			if (!selectedFiles[0].type.includes('image')) {
 				invalidFiles = true
 			}
 		}
-		if(invalidFiles){
+		if (invalidFiles) {
 
 			this.ocShowAlert('Please Only Select Photos')
 			selectedFiles = []
-			this.setState({selectedFiles })
+			this.setState({ selectedFiles })
 			document.getElementById("upload-photo").value = ''
 			return
 		}
@@ -72,7 +75,7 @@ class NewItemPage extends Component {
 		let alertContainer = document.getElementById('reset')
 		alertContainer.style.display = 'inline'
 		alertContainer.textContent = message
-		setTimeout( () =>{
+		setTimeout(() => {
 			$(alertContainer).fadeOut(1000)
 
 
@@ -134,7 +137,7 @@ class NewItemPage extends Component {
 				img.classList.add('NewPageItem-center-cropped')
 				// if (oFREvent.target.result[5] == 'i') {
 
-					img.src = oFREvent.target.result;
+				img.src = oFREvent.target.result;
 				// } else {
 				// 	return
 				// }
@@ -144,20 +147,20 @@ class NewItemPage extends Component {
 		}, 500)
 		setTimeout(function () {
 			// if (!invalid) {
-				cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
-				if (selectedPhotos.length > 8) {
-					cardHead.childNodes[0].style.color = 'red'
-					document.getElementById('reset').style.display = 'inline'
-					document.getElementById('reset').textContent = 'Reset'
-				}
-				cardHead.classList.remove('fadeOut')
-				cardHead.classList.add('fadeIn')
+			cardHead.childNodes[0].innerHTML = `${selectedPhotos.length} Photo${selectedPhotos.length > 1 ? 's' : ''}  Selected`
+			if (selectedPhotos.length > 8) {
+				cardHead.childNodes[0].style.color = 'red'
 				document.getElementById('reset').style.display = 'inline'
 				document.getElementById('reset').textContent = 'Reset'
+			}
+			cardHead.classList.remove('fadeOut')
+			cardHead.classList.add('fadeIn')
+			document.getElementById('reset').style.display = 'inline'
+			document.getElementById('reset').textContent = 'Reset'
 			// } else {
-				photoLabel.css('pointer-events', '')
-				cardHead.classList.remove('fadeOut')
-				cardHead.classList.add('fadeIn')
+			photoLabel.css('pointer-events', '')
+			cardHead.classList.remove('fadeOut')
+			cardHead.classList.add('fadeIn')
 			// }
 		}, 1000)
 	};
@@ -300,21 +303,19 @@ class NewItemPage extends Component {
 						</div> */}
 					</div>
 					<div className="card-body">
-						<div className='form-div'>
 
+						<div className='form-div'>
+							<p className="card-text">Name: </p>
+							<input type="text" name="name" onChange={this.handleChange} />
+
+						</div>
+						<div className='form-div'>
 							<p className="card-text">Piece / Outfit: </p>
 							<select name="type" onChange={this.handleChange}>
 								<option value="item">Piece</option>
 								<option value="outfit">Outfit</option>
 							</select>
 						</div>
-						{/* <div className='form-div'>
-							<p className="card-text">Type: </p>
-							<select name="type" onChange={this.handleChange}>
-								<option value="shoes">Shoes</option>
-								<option value="top">Top</option>
-							</select>
-						</div> */}
 						<div className='form-div'>
 
 							<p className="card-text" >Season: </p>
@@ -322,11 +323,6 @@ class NewItemPage extends Component {
 								<option value="fw">Fall + Winter</option>
 								<option value="ss">Spring + Summer</option>
 							</select>
-						</div>
-						<div className='form-div'>
-							<p className="card-text">Name: </p>
-							<input type="text" name="name" onChange={this.handleChange} />
-
 						</div>
 						<div className='form-div'>
 
