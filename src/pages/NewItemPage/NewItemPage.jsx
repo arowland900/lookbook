@@ -4,6 +4,8 @@ import $ from 'jquery';
 import './NewItemPage.css';
 import camera from '../../../src/camera.png'
 import { Link } from 'react-router-dom';
+import { ReactSelectize, SimpleSelect, MultiSelect } from 'react-selectize';
+
 
 class NewItemPage extends Component {
 
@@ -19,8 +21,8 @@ class NewItemPage extends Component {
 				name: '',
 				description: '',
 				tags: '',
-				items: '',
-				type: '',
+				items: [],
+				type: 'item',
 				color: '',
 			}
 		}
@@ -39,12 +41,22 @@ class NewItemPage extends Component {
 
 	handleChange = e => {
 		console.log("hitting handle change!")
-		const formData = { ...this.state.formData, [e.target.name]: e.target.value };
-		this.setState({
-			formData,
-			// invalidForm: !this.formRef.current.checkValidity()
-		});
-		// console.log(this.state.formData)
+		if (e.target) {
+			const formData = { ...this.state.formData, [e.target.name]: e.target.value };
+			this.setState({
+				formData,
+				// invalidForm: !this.formRef.current.checkValidity()
+			});
+		} else {
+			console.log("handleChange else e: ", e)
+			let values = e.map(c => c.value)
+			const formData = { ...this.state.formData, items: values};
+			this.setState({
+				formData,
+				// invalidForm: !this.formRef.current.checkValidity()
+			});
+		}
+		console.log(this.state.formData)
 	};
 
 	multipleFileChangedHandler = (event) => {
@@ -230,9 +242,10 @@ class NewItemPage extends Component {
 	/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
-		console.log(camera)
+		
+		console.log(this.props.items)
 		await this.fadeDivIn()
-
+		this.setState({ items: this.props.items })
 		// ALLOW DRAG AND DROP
 		let dropArea = document.getElementById('photo-label')
 			;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -275,8 +288,8 @@ class NewItemPage extends Component {
 
 			handleFiles(files)
 		}
-
-
+		console.log(this.state)
+		document.querySelector('.resizable-input').style.display = 'none'
 
 		// END DRAG AND DROP
 	}
@@ -305,11 +318,6 @@ class NewItemPage extends Component {
 					<div className="card-body">
 
 						<div className='form-div'>
-							<p className="card-text">Name: </p>
-							<input type="text" name="name" onChange={this.handleChange} />
-
-						</div>
-						<div className='form-div'>
 							<p className="card-text">Piece / Outfit: </p>
 							<select name="type" onChange={this.handleChange}>
 								<option value="item">Piece</option>
@@ -317,49 +325,66 @@ class NewItemPage extends Component {
 							</select>
 						</div>
 						<div className='form-div'>
+							<p className="card-text">Name: </p>
+							<input type="text" name="name" onChange={this.handleChange} />
 
-							<p className="card-text" >Season: </p>
-							<select name="season" onChange={this.handleChange}>
-								<option value="fw">Fall + Winter</option>
-								<option value="ss">Spring + Summer</option>
-							</select>
 						</div>
 						<div className='form-div'>
+
+							<p className="card-text" >Type: </p>
+							<select name="type" onChange={this.handleChange}>
+								<option value="top">Top</option>
+								<option value="bottom">Bottom</option>
+								<option value="outerwear">Outerwear</option>
+								<option value="underwear">Underwear</option>
+								<option value="footwear">Footwear</option>
+								<option value="tailoring">Tailoring</option>
+								<option value="accessory">Accessory</option>
+							</select>
+						</div>
+						<div className='form-div' style={{ marginBottom: '-5px' }}>
 
 							<p className="card-text">Description: </p>
 							<textarea type="text" name="description" onChange={this.handleChange} />
 						</div>
-						<div className="mt-5 form-div">
-							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>
-						</div>
+
 					</div>
 					<div className="card-body">
+
 						<div className='form-div'>
 
-							<p className="card-text">Piece / Outfit: </p>
-							<select name="type" onChange={this.handleChange}>
-								<option value="item">Piece</option>
-								<option value="outfit">Outfit</option>
-							</select>
+							{/* <p style={{display:'block', marginBottom:'-1px'}} className="card-text">Pieces: </p>
+							<select style={{height:'40px'}}  multiple name="items" onChange={this.handleChange}>
+								{this.props.items.map((x,i) => {
+									return <option value={x.name}> {x.name}</option>
+								})
+
+								}
+							</select> */}
+							{this.state.items ? 
+							
+							<MultiSelect
+								placeholder="Select Pieces"
+								options={this.state.items.map(
+									item => ({ label: item.name, value: item.name })
+								)}
+								onValuesChange={this.handleChange}
+							/>
+							:
+							'loading'
+							}
 						</div>
 						<div className='form-div'>
-
-							<p className="card-text">Season: </p>
-							<select name="season" onChange={this.handleChange}>
-								<option value="fw">Fall + Winter</option>
-								<option value="ss">Spring + Summer</option>
-							</select>
-						</div>
-						<div className='form-div'>
-							<p className="card-text">Name: </p>
-							<input type="text" name="name" onChange={this.handleChange} />
+							<p className="card-text">Color: </p>
+							<input type="text" name="color" onChange={this.handleChange} />
 
 						</div>
 						<div className='form-div'>
+							<p className="card-text">Tags: </p>
+							<textarea style={{ height: '75px' }} type="text" name="tags" onChange={this.handleChange} />
 
-							<p className="card-text">Description: </p>
-							<textarea type="text" name="description" onChange={this.handleChange} />
 						</div>
+
 						<div className="mt-5 form-div">
 							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>
 						</div>
