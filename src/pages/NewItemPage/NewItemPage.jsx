@@ -3,8 +3,8 @@ import axios from 'axios';
 import $ from 'jquery';
 import './NewItemPage.css';
 import camera from '../../../src/camera.png'
-import { Link } from 'react-router-dom';
-// import { ReactSelectize, SimpleSelect, MultiSelect } from 'react-selectize';
+import chroma from 'chroma-js';
+import Select from 'react-select';
 
 
 class NewItemPage extends Component {
@@ -243,7 +243,7 @@ class NewItemPage extends Component {
 
 	componentDidMount = async () => {
 
-		console.log(this.props.items)
+		console.log("HERE ARE THE PROPS ITEMS: ", this.props.items)
 		await this.fadeDivIn()
 		this.setState({ items: this.props.items })
 		// ALLOW DRAG AND DROP
@@ -318,7 +318,7 @@ class NewItemPage extends Component {
 					<div className="card-body">
 
 						<div className='form-div'>
-							<h3 className="card-text" style={{ color: '#555', display: 'inline'}}>Piece / Outfit: </h3>
+							<h3 className="card-text" style={{ color: '#555', display: 'inline' }}>Piece / Outfit: </h3>
 							<select name="type" onChange={this.handleChange}>
 								<option value="item">Piece</option>
 								<option value="outfit">Outfit</option>
@@ -329,7 +329,7 @@ class NewItemPage extends Component {
 							<input type="text" name="name" onChange={this.handleChange} />
 
 						</div>
-						<div className='form-div'>
+						<div className='form-div type'>
 
 							<p className="card-text" >Type: </p>
 							<select name="type" onChange={this.handleChange}>
@@ -342,7 +342,18 @@ class NewItemPage extends Component {
 								<option value="accessory">Accessory</option>
 							</select>
 						</div>
-
+						{this.props.items[0] ?
+						<Select
+							value={this.props.items[0].name}
+							isMulti
+							options={[{value: 'hi', label: "yoo"}, {value: 'h', label: "h"}]}
+							name="colors"
+							className="basic-multi-select"
+							classNamePrefix="select"
+							onChange={this.onChange}
+						/>
+						: ''
+						}
 						<div className='form-div'>
 							<p className="card-text">Tags: </p>
 							<textarea style={{ height: '105px' }} type="text" name="tags" onChange={this.handleChange} />
