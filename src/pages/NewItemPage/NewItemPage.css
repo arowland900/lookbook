@@ -166,3 +166,20 @@ textarea {
     text-indent: -9999px;
     object-fit: cover;
 }
+/* 
+.select__control {
+    height: 100px;
+} */
+
+.styledInput {
+    border-radius: 4px;
+    border: 1px solid rgb(204, 204, 204);
+    height:32.75px;
+    width:95%;
+    font-size: 15px;
+    /* font-weight:; */
+    font-weight: 100;
+    font-family: Arial;
+    padding-left: 10px;
+    /* margin-left: 10px; */
+}

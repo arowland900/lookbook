@@ -45,15 +45,22 @@ class NewItemPage extends Component {
 		console.log("hitting handle change!")
 		console.log("E: ", e)
 		if (e.target) {
-		const formData = { ...this.state.formData, [e.target.name]: e.target.value };
-		this.setState({
-			formData,
-			// invalidForm: !this.formRef.current.checkValidity()
-		});
+			const formData = { ...this.state.formData, [e.target.name]: e.target.value };
+			this.setState({
+				formData,
+				// invalidForm: !this.formRef.current.checkValidity()
+			});
 		} else {
 			console.log("handleChange else e: ", e)
-			let values = e.map(c => c.value)
-			const formData = { ...this.state.formData, items: values};
+			let formData = {};
+			if (e[0]) {
+
+				let values = e.map(c => c.value)
+				formData = { ...this.state.formData, items: values };
+
+			} else {
+				formData = { ...this.state.formData, type: e };
+			}
 			this.setState({
 				formData,
 				// invalidForm: !this.formRef.current.checkValidity()
@@ -249,9 +256,9 @@ class NewItemPage extends Component {
 		console.log("HERE ARE THE PROPS ITEMS: ", this.props.items)
 		await this.fadeDivIn()
 		this.setState({ items: this.props.items })
-		let itemNames = this.props.items.map(e => {return {'value': e._id, 'label': e.name}})
+		let itemNames = this.props.items.map(e => { return { 'value': e._id, 'label': e.name } })
 		// let itemIDs = this.props.items.map(e => e._id)
-		this.setState({itemNames})
+		this.setState({ itemNames })
 		// ALLOW DRAG AND DROP
 		let dropArea = document.getElementById('photo-label')
 			;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -335,33 +342,7 @@ class NewItemPage extends Component {
 							<input type="text" name="name" onChange={this.handleChange} />
 
 						</div>
-						<div className='form-div type'>
 
-							<p className="card-text" >Type: </p>
-							<select name="type" onChange={this.handleChange}>
-								<option value="top">Top</option>
-								<option value="bottom">Bottom</option>
-								<option value="outerwear">Outerwear</option>
-								<option value="underwear">Underwear</option>
-								<option value="footwear">Footwear</option>
-								<option value="tailoring">Tailoring</option>
-								<option value="accessory">Accessory</option>
-							</select>
-						</div>
-						{this.props.items[0] ?
-						
-						<Select
-							defaultValue={this.state.itemNames[0]}
-							isMulti
-							options={this.state.itemNames}
-							closeMenuOnSelect={false}
-							name="colors"
-							className="basic-multi-select"
-							classNamePrefix="select"
-							onChange={this.handleChange}
-						/>
-						: ''
-						}
 						<div className='form-div'>
 							<p className="card-text">Tags: </p>
 							<textarea style={{ height: '105px' }} type="text" name="tags" onChange={this.handleChange} />
@@ -370,40 +351,73 @@ class NewItemPage extends Component {
 
 					</div>
 					<div className="card-body">
-
-						<div className='form-div'>
-
-							{/* <p style={{display:'block', marginBottom:'-1px'}} className="card-text">Pieces: </p>
-							<select style={{height:'40px'}}  multiple name="items" onChange={this.handleChange}>
-								{this.props.items.map((x,i) => {
-									return <option value={x.name}> {x.name}</option>
-								})
-
-								}
-							</select> */}
-							{/* {this.state.items ? 
-							
-							<MultiSelect
-								placeholder="Select Pieces"
-								options={this.state.items.map(
-									item => ({ label: item.name, value: item.name })
-								)}
-								onValuesChange={this.handleChange}
+						<div className='form-div type'>
+							<p className="card-text" >Type: </p>
+							<Select
+								defaultValue={'top'}
+								options={[
+									{ value: 'top', label: 'Top' },
+									{ value: 'bottom', label: 'Bottom' },
+									{ value: 'outerwear', label: 'Outerwear' },
+									{ value: 'underwear', label: 'Underwear' },
+									{ value: 'footwear', label: 'Footwear' },
+									{ value: 'tailoring', label: 'Tailoring' },
+									{ value: 'accessory', label: 'Accessory' },
+								]}
+								closeMenuOnSelect={true}
+								name="type"
+								className="basic-multi-select"
+								classNamePrefix="select"
+								onChange={this.handleChange}
 							/>
-							:
-							'loading'
-							} */}
+							{/* <p className="card-text" >Type: </p>
+							<select name="type" onChange={this.handleChange}>
+								<option value="top">Top</option>
+								<option value="bottom">Bottom</option>
+								<option value="outerwear">Outerwear</option>
+								<option value="underwear">Underwear</option>
+								<option value="footwear">Footwear</option>
+								<option value="tailoring">Tailoring</option>
+								<option value="accessory">Accessory</option>
+							</select> */}
 						</div>
 						<div className='form-div'>
-							<p className="card-text">Color: </p>
-							<input type="text" name="color" onChange={this.handleChange} />
+
+							<p className="card-text" >Pieces: </p>
+							{this.props.items[0] ?
+								<Select
+									defaultValue={this.state.itemNames[0]}
+									isMulti
+									options={this.state.itemNames}
+									closeMenuOnSelect={true}
+									name="items"
+									className="basic-multi-select"
+									classNamePrefix="select"
+									onChange={this.handleChange}
+								/>
+								: ''
+							}
+						</div>
+						<div className='form-div'>
+							<p className="card-text">Color / Pattern: </p>
+							{/* <div className="select__value-container select__value-container--has-value css-g1d714-ValueContainer">
+								
+								<div className="css-b8ldur-Input">
+									<div className="select__input" style={{ display: 'inline-block;' }}>
+										<div style={{ position: 'absolute;', top: '0px;', left: '0px;', visibility: 'hidden;', height: '0px;', overflow: 'scroll;', whiteSpace: 'pre;', fontSize: '16px;', fontFamily: 'Arial;', fontWeight: '400;', fontStyle: 'normal;', letterSpacing: 'normal;', textTransform: 'none;' }}>
+											<input name="color" onChange={this.handleChange} autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-2-input" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" value="" style={{ boxSizing: 'content-box;', width: '2px;', background: '0px center;', border: '0px;', fontSize: 'inherit;', opacity: '1;', outline: '0px;', padding: '0px;', color: 'inherit;' }} />
+										</div>
+									</div>
+								</div>
+							</div> */}
+							<input className="styledInput select__single-value " type="text" name="color" style={{ position: 'absolute;', top: '0px;', left: '0px;', visibility: 'hidden;', height: '0px;', overflow: 'scroll;', whiteSpace: 'pre;', fontSize: '16px;', fontFamily: 'Arial;', fontWeight: '400;', fontStyle: 'normal;', letterSpacing: 'normal;', textTransform: 'none;' }} onChange={this.handleChange} />
 
 						</div>
-						<div className='form-div' style={{ marginBottom: '-5px' }}>
+						{/* <div className='form-div' style={{ marginBottom: '-5px' }}>
 
 							<p className="card-text">Description: </p>
 							<textarea type="text" name="description" onChange={this.handleChange} />
-						</div>
+						</div> */}
 
 						<div className="mt-5 form-div">
 							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>
