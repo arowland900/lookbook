@@ -351,7 +351,7 @@ class NewItemPage extends Component {
 
 					</div>
 					<div className="card-body">
-						<div className='form-div type'>
+						{/* <div className='form-div type'> */}
 							<p className="card-text" >Type: </p>
 							<Select
 								defaultValue={'top'}
@@ -380,8 +380,8 @@ class NewItemPage extends Component {
 								<option value="tailoring">Tailoring</option>
 								<option value="accessory">Accessory</option>
 							</select> */}
-						</div>
-						<div className='form-div'>
+						{/* </div> */}
+						{/* <div className='form-div'> */}
 
 							<p className="card-text" >Pieces: </p>
 							{this.props.items[0] ?
@@ -397,27 +397,8 @@ class NewItemPage extends Component {
 								/>
 								: ''
 							}
-						</div>
-						<div className='form-div'>
-							<p className="card-text">Color / Pattern: </p>
-							{/* <div className="select__value-container select__value-container--has-value css-g1d714-ValueContainer">
-								
-								<div className="css-b8ldur-Input">
-									<div className="select__input" style={{ display: 'inline-block;' }}>
-										<div style={{ position: 'absolute;', top: '0px;', left: '0px;', visibility: 'hidden;', height: '0px;', overflow: 'scroll;', whiteSpace: 'pre;', fontSize: '16px;', fontFamily: 'Arial;', fontWeight: '400;', fontStyle: 'normal;', letterSpacing: 'normal;', textTransform: 'none;' }}>
-											<input name="color" onChange={this.handleChange} autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-2-input" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" value="" style={{ boxSizing: 'content-box;', width: '2px;', background: '0px center;', border: '0px;', fontSize: 'inherit;', opacity: '1;', outline: '0px;', padding: '0px;', color: 'inherit;' }} />
-										</div>
-									</div>
-								</div>
-							</div> */}
-							<input className="styledInput select__single-value " type="text" name="color" style={{ position: 'absolute;', top: '0px;', left: '0px;', visibility: 'hidden;', height: '0px;', overflow: 'scroll;', whiteSpace: 'pre;', fontSize: '16px;', fontFamily: 'Arial;', fontWeight: '400;', fontStyle: 'normal;', letterSpacing: 'normal;', textTransform: 'none;' }} onChange={this.handleChange} />
-
-						</div>
-						{/* <div className='form-div' style={{ marginBottom: '-5px' }}>
-
-							<p className="card-text">Description: </p>
-							<textarea type="text" name="description" onChange={this.handleChange} />
-						</div> */}
+						{/* </div> */}
+						
 
 						<div className="mt-5 form-div">
 							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>

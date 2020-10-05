@@ -28,12 +28,13 @@
     display: none;
     justify-content: space-around;
     align-items: center;
+    /* min-height: 600px;  */
     /* min-width: 800px; */
 }
 
-.card-text {
+/* .card-text {
 
-}
+} */
 
 .card-header {
     min-width: 276.88px;
@@ -182,4 +183,8 @@ textarea {
     font-family: Arial;
     padding-left: 10px;
     /* margin-left: 10px; */
+}
+
+.react-select__menu-list{
+    height: 9px
 }
