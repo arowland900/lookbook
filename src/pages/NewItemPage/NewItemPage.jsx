@@ -14,6 +14,7 @@ class NewItemPage extends Component {
 		this.state = {
 			items: null,
 			itemNames: [],
+			itemIDs: [],
 			selectedFile: null,
 			selectedFiles: null,
 			invalidForm: true,
@@ -42,21 +43,22 @@ class NewItemPage extends Component {
 
 	handleChange = e => {
 		console.log("hitting handle change!")
-		// if (e.target) {
+		console.log("E: ", e)
+		if (e.target) {
 		const formData = { ...this.state.formData, [e.target.name]: e.target.value };
 		this.setState({
 			formData,
 			// invalidForm: !this.formRef.current.checkValidity()
 		});
-		// } else {
-		// 	console.log("handleChange else e: ", e)
-		// 	let values = e.map(c => c.value)
-		// 	const formData = { ...this.state.formData, items: values};
-		// 	this.setState({
-		// 		formData,
-		// 		// invalidForm: !this.formRef.current.checkValidity()
-		// 	});
-		// }
+		} else {
+			console.log("handleChange else e: ", e)
+			let values = e.map(c => c.value)
+			const formData = { ...this.state.formData, items: values};
+			this.setState({
+				formData,
+				// invalidForm: !this.formRef.current.checkValidity()
+			});
+		}
 		console.log(this.state.formData)
 	};
 
@@ -247,7 +249,8 @@ class NewItemPage extends Component {
 		console.log("HERE ARE THE PROPS ITEMS: ", this.props.items)
 		await this.fadeDivIn()
 		this.setState({ items: this.props.items })
-		let itemNames = this.props.items.map(e => {return {'value': e.name, 'label': e.name}})
+		let itemNames = this.props.items.map(e => {return {'value': e._id, 'label': e.name}})
+		// let itemIDs = this.props.items.map(e => e._id)
 		this.setState({itemNames})
 		// ALLOW DRAG AND DROP
 		let dropArea = document.getElementById('photo-label')
@@ -348,13 +351,14 @@ class NewItemPage extends Component {
 						{this.props.items[0] ?
 						
 						<Select
-							value={this.props.items[0].name}
+							defaultValue={this.state.itemNames[0]}
 							isMulti
 							options={this.state.itemNames}
+							closeMenuOnSelect={false}
 							name="colors"
 							className="basic-multi-select"
 							classNamePrefix="select"
-							onChange={this.onChange}
+							onChange={this.handleChange}
 						/>
 						: ''
 						}
