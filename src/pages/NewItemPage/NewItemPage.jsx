@@ -13,6 +13,7 @@ class NewItemPage extends Component {
 		super(props);
 		this.state = {
 			items: null,
+			itemNames: [],
 			selectedFile: null,
 			selectedFiles: null,
 			invalidForm: true,
@@ -246,6 +247,8 @@ class NewItemPage extends Component {
 		console.log("HERE ARE THE PROPS ITEMS: ", this.props.items)
 		await this.fadeDivIn()
 		this.setState({ items: this.props.items })
+		let itemNames = this.props.items.map(e => {return {'value': e.name, 'label': e.name}})
+		this.setState({itemNames})
 		// ALLOW DRAG AND DROP
 		let dropArea = document.getElementById('photo-label')
 			;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -343,10 +346,11 @@ class NewItemPage extends Component {
 							</select>
 						</div>
 						{this.props.items[0] ?
+						
 						<Select
 							value={this.props.items[0].name}
 							isMulti
-							options={[{value: 'hi', label: "yoo"}, {value: 'h', label: "h"}]}
+							options={this.state.itemNames}
 							name="colors"
 							className="basic-multi-select"
 							classNamePrefix="select"
