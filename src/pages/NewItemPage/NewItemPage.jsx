@@ -42,11 +42,11 @@ class NewItemPage extends Component {
 	handleChange = e => {
 		console.log("hitting handle change!")
 		// if (e.target) {
-			const formData = { ...this.state.formData, [e.target.name]: e.target.value };
-			this.setState({
-				formData,
-				// invalidForm: !this.formRef.current.checkValidity()
-			});
+		const formData = { ...this.state.formData, [e.target.name]: e.target.value };
+		this.setState({
+			formData,
+			// invalidForm: !this.formRef.current.checkValidity()
+		});
 		// } else {
 		// 	console.log("handleChange else e: ", e)
 		// 	let values = e.map(c => c.value)
@@ -242,7 +242,7 @@ class NewItemPage extends Component {
 	/*--- Lifecycle Methods ---*/
 
 	componentDidMount = async () => {
-		
+
 		console.log(this.props.items)
 		await this.fadeDivIn()
 		this.setState({ items: this.props.items })
@@ -318,7 +318,7 @@ class NewItemPage extends Component {
 					<div className="card-body">
 
 						<div className='form-div'>
-							<p className="card-text">Piece / Outfit: </p>
+							<h3 className="card-text" style={{ color: '#555', display: 'inline'}}>Piece / Outfit: </h3>
 							<select name="type" onChange={this.handleChange}>
 								<option value="item">Piece</option>
 								<option value="outfit">Outfit</option>
@@ -342,10 +342,11 @@ class NewItemPage extends Component {
 								<option value="accessory">Accessory</option>
 							</select>
 						</div>
-						<div className='form-div' style={{ marginBottom: '-5px' }}>
 
-							<p className="card-text">Description: </p>
-							<textarea type="text" name="description" onChange={this.handleChange} />
+						<div className='form-div'>
+							<p className="card-text">Tags: </p>
+							<textarea style={{ height: '105px' }} type="text" name="tags" onChange={this.handleChange} />
+
 						</div>
 
 					</div>
@@ -379,10 +380,10 @@ class NewItemPage extends Component {
 							<input type="text" name="color" onChange={this.handleChange} />
 
 						</div>
-						<div className='form-div'>
-							<p className="card-text">Tags: </p>
-							<textarea style={{ height: '75px' }} type="text" name="tags" onChange={this.handleChange} />
+						<div className='form-div' style={{ marginBottom: '-5px' }}>
 
+							<p className="card-text">Description: </p>
+							<textarea type="text" name="description" onChange={this.handleChange} />
 						</div>
 
 						<div className="mt-5 form-div">

@@ -1,6 +1,7 @@
 #sticky {
     position: fixed;
     background-color: coral;
+    /* background-color: rgb(198, 190, 173); */
     width: 100%;
     /* margin-bottom: -300px; */
 }
