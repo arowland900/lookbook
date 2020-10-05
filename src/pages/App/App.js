@@ -19,6 +19,7 @@ class App extends Component {
 		this.state = {
 			user: userService.getUser(),
 			items: [],
+			outfits: []
 			// reloaded: false
 		};
 	}
@@ -91,7 +92,7 @@ class App extends Component {
 			})
 				.then(res => res.json());
 
-			this.setState({ items });
+			this.setState({ items: items.items, outfits: items.objects });
 		} else {
 			console.log("no user logged in")
 		}

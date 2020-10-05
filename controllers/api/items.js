@@ -104,6 +104,10 @@ async function create(req, res) {
 async function index(req, res) {
 	console.log("REQ USER: ", req.user)
 	const items = await Item.find({user: req.user._id}).sort({'_id':-1});
-	// console.log("DA ITEMS: ", items)
-	res.status(200).json(items);
+	const outfits = await Outfit.find({user: req.user._id}).sort({'_id':-1});
+
+	console.log("OUTFITS: ", outfits)
+	console.log("DA ITEMS: ", items)
+	let obj = {items, outfits}
+	res.status(200).json(obj);
 }
