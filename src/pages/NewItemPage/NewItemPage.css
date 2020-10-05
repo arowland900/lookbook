@@ -128,7 +128,7 @@
 .card-body {
     margin-bottom: -5px;
     /* margin-left: 10px; */
-    width: 276.88px;
+    min-width: 553.76px;
     align-content: center;
     /* margin: 0 auto; */
 }
@@ -188,3 +188,7 @@ textarea {
 .react-select__menu-list{
     height: 9px
 }
+
+/* .css-1wa3eu0-placeholder {
+    content: "Search..."
+} */

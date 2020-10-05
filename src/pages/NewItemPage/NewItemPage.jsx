@@ -41,6 +41,8 @@ class NewItemPage extends Component {
 		window.location.reload()
 	}
 
+
+
 	handleChange = e => {
 		console.log("hitting handle change!")
 		console.log("E: ", e)
@@ -314,8 +316,8 @@ class NewItemPage extends Component {
 
 				{/* <div id="oc-alert-container"></div> */}
 				<div
-					className="card border-light mb-3 whole-card"
-					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
+					className=" whole-card"
+					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)', height: '400px' }}
 				>
 					<div className="card-header">
 						<h3 style={{ color: '#555', display: 'block' }}>Select Up To 8 Images</h3>
@@ -349,8 +351,8 @@ class NewItemPage extends Component {
 
 						</div>
 
-					</div>
-					<div className="card-body">
+					{/* </div>
+					<div className="card-body"> */}
 						{/* <div className='form-div type'> */}
 							<p className="card-text" >Type: </p>
 							<Select

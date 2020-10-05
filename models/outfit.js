@@ -2,10 +2,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-let itemSchema = new Schema(
+let outfitSchema = new Schema(
     {
         name: String,
-        type: String,
+        pieces: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        }],
         tags: [String],
         photos: [String],
         user: {
@@ -19,4 +22,4 @@ let itemSchema = new Schema(
 );
 
 
-module.exports = mongoose.model('Item', itemSchema);
+module.exports = mongoose.model('Outfit', outfitSchema);
