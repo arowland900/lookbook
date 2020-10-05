@@ -1,4 +1,5 @@
 const Item = require('../../models/item');
+const Outfit = require('../../models/outfit');
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
@@ -90,10 +91,14 @@ async function addPhoto(req, res) {
 }
 
 async function create(req, res) {
-
 	req.body.user = req.user._id
-	const item = await Item.create(req.body);
-	res.status(201).json(item);
+	if(req.body.type == 'item'){
+		const item = await Item.create(req.body);
+		res.status(201).json(item);
+	} else {
+		const outfit = await Outfit.create(req.body);
+		res.status(201).json(outfit);
+	}
 }
 
 async function index(req, res) {
