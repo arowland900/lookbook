@@ -333,7 +333,7 @@ class NewItemPage extends Component {
 					</div>
 					<div className="card-body">
 
-						<div className='form-div'>
+						<div className='form-div-inline'>
 							<h3 className="card-text" style={{ color: '#555', display: 'inline' }}>Piece / Outfit: </h3>
 							{/* <select name="type" onChange={this.handleChange}>
 								<option value="item">Piece</option>
@@ -348,11 +348,12 @@ class NewItemPage extends Component {
 									closeMenuOnSelect={true}
 									name="itemOrOutfit"
 									classNamePrefix="select"
+									// style={{width: '300px'}}
 									onChange={this.handleChange}
 								/>
 					
-							<p className="card-text">Name: </p>
-							<input type="text" name="name" onChange={this.handleChange} />
+							{/* <p className="card-text">Name: </p>
+							<input type="text" name="name" onChange={this.handleChange} /> */}
 
 						</div>
 		
