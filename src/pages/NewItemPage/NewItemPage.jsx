@@ -218,9 +218,9 @@ class NewItemPage extends Component {
 						if (response.data.error) {
 							console.log(response.data.error)
 							if ('LIMIT_FILE_SIZE' === response.data.error.code) {
-								this.ocShowAlert('Max size: 2MB', 'red');
+								this.ocShowAlert('Max size: 20MB', 'red');
 							} else if ('LIMIT_UNEXPECTED_FILE' === response.data.error.code) {
-								this.ocShowAlert('Max 4 images allowed', 'red');
+								this.ocShowAlert('Max 8 images allowed', 'red');
 							} else {
 								// If not the given ile type
 								this.ocShowAlert(response.data.error, 'red');
@@ -317,7 +317,7 @@ class NewItemPage extends Component {
 				{/* <div id="oc-alert-container"></div> */}
 				<div
 					className=" whole-card"
-					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)', height: '400px' }}
+					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
 				>
 					<div className="card-header">
 						<h3 style={{ color: '#555', display: 'block' }}>Select Up To 8 Images</h3>
@@ -338,41 +338,65 @@ class NewItemPage extends Component {
 								<option value="item">Piece</option>
 								<option value="outfit">Outfit</option>
 							</select>
-						</div>
-						<div className='form-div'>
+							{/* </div>
+						<div className='form-div'> */}
 							<p className="card-text">Name: </p>
 							<input type="text" name="name" onChange={this.handleChange} />
 
 						</div>
-
+						{/* 
 						<div className='form-div'>
 							<p className="card-text">Tags: </p>
 							<textarea style={{ height: '105px' }} type="text" name="tags" onChange={this.handleChange} />
 
-						</div>
+						</div> */}
 
-					{/* </div>
+						{/* </div>
 					<div className="card-body"> */}
 						{/* <div className='form-div type'> */}
-							<p className="card-text" >Type: </p>
-							<Select
-								defaultValue={'top'}
-								options={[
-									{ value: 'top', label: 'Top' },
-									{ value: 'bottom', label: 'Bottom' },
-									{ value: 'outerwear', label: 'Outerwear' },
-									{ value: 'underwear', label: 'Underwear' },
-									{ value: 'footwear', label: 'Footwear' },
-									{ value: 'tailoring', label: 'Tailoring' },
-									{ value: 'accessory', label: 'Accessory' },
-								]}
-								closeMenuOnSelect={true}
-								name="type"
-								className="basic-multi-select"
-								classNamePrefix="select"
-								onChange={this.handleChange}
-							/>
-							{/* <p className="card-text" >Type: </p>
+						{this.state.formData.type === 'item'
+							?
+							<div>
+
+								<p className="card-text" >Type: </p>
+								<Select
+									defaultValue={'top'}
+									options={[
+										{ value: 'top', label: 'Top' },
+										{ value: 'bottom', label: 'Bottom' },
+										{ value: 'outerwear', label: 'Outerwear' },
+										{ value: 'underwear', label: 'Underwear' },
+										{ value: 'footwear', label: 'Footwear' },
+										{ value: 'tailoring', label: 'Tailoring' },
+										{ value: 'accessory', label: 'Accessory' },
+									]}
+									closeMenuOnSelect={true}
+									name="type"
+									className="basic-multi-select"
+									classNamePrefix="select"
+									onChange={this.handleChange}
+								/>
+							</div>
+							:
+							<div>
+								<p className="card-text" >Pieces: </p>
+								{this.props.items[0] ?
+									<Select
+										defaultValue={this.state.itemNames[0]}
+										isMulti
+										options={this.state.itemNames}
+										closeMenuOnSelect={true}
+										name="items"
+										className="basic-multi-select"
+										classNamePrefix="select"
+										onChange={this.handleChange}
+									/>
+									: ''
+								}
+
+							</div>
+						}
+						{/* <p className="card-text" >Type: </p>
 							<select name="type" onChange={this.handleChange}>
 								<option value="top">Top</option>
 								<option value="bottom">Bottom</option>
@@ -385,22 +409,8 @@ class NewItemPage extends Component {
 						{/* </div> */}
 						{/* <div className='form-div'> */}
 
-							<p className="card-text" >Pieces: </p>
-							{this.props.items[0] ?
-								<Select
-									defaultValue={this.state.itemNames[0]}
-									isMulti
-									options={this.state.itemNames}
-									closeMenuOnSelect={true}
-									name="items"
-									className="basic-multi-select"
-									classNamePrefix="select"
-									onChange={this.handleChange}
-								/>
-								: ''
-							}
 						{/* </div> */}
-						
+
 
 						<div className="mt-5 form-div">
 							<button className="btn btn-info" onClick={this.multipleFileUploadHandler}>Upload!</button>
