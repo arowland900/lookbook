@@ -53,7 +53,18 @@ class App extends Component {
 			});
 	}
 
-
+	handleUpdateItem = async updatedItemData => {
+		const updatedItem = await puppyAPI.update(updatedItemData);
+		// Using map to replace just the puppy that was updated
+		const newItemssArray = this.state.items.map(p =>
+			p._id === updatedItem._id ? updatedItem : p
+		);
+		this.setState(
+			{ items: newItemssArray },
+			// This cb function runs after state is updated
+			() => this.props.history.push('/')
+		);
+	}
 
 
 
@@ -114,7 +125,7 @@ class App extends Component {
 						/>
 					</div>
 				</div>
-				<div id="main-holder" style={{paddingTop: '150px', paddingBottom: '100px'}}>
+				<div id="main-holder" style={{ paddingTop: '150px', paddingBottom: '100px' }}>
 					<Switch>
 						<Route exact path='/' render={() =>
 							<HomePage
@@ -158,6 +169,7 @@ class App extends Component {
 								location={location}
 								user={this.state.user}
 								getItem={this.getItem}
+								handleUpdateItem={this.handleUpdateItem}
 							/>
 						} />
 
