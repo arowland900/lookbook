@@ -14,7 +14,8 @@ let outfitSchema = new Schema(
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User'
-        }
+        },
+        deleted: {type: Boolean, default: false}
     },
     {
         timestamps: true
