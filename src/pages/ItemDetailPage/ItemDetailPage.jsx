@@ -7,15 +7,35 @@ class ItemDetailPage extends Component {
 	state = {
 		item: '',
 		currentImg: '',
-		allImgs: []
+		allImgs: [],
+		edit: false,
+		invalidForm: false,
+		formData: this.props.location.state.item
 	}
+
+
+
+	formRef = React.createRef();
+
+	handleSubmit = e => {
+		e.preventDefault();
+		this.props.handleUpdateItem(this.state.formData);
+	};
+
+	handleChange = e => {
+		const formData = { ...this.state.formData, [e.target.name]: e.target.value };
+		this.setState({
+			formData,
+			invalidForm: !this.formRef.current.checkValidity()
+		});
+	};
 
 	fadeDiv = () => {
 		let div = document.querySelector('.itemDetailPage')
 		$(div).fadeIn('slow')
 	}
 
-	resize = (i,el) => {
+	resize = (i, el) => {
 		console.log("hitting resize")
 		let mainImg = document.querySelector(i)
 		if (mainImg.height + 50 > mainImg.width) {
@@ -27,10 +47,12 @@ class ItemDetailPage extends Component {
 			$(mainImg).css('width', 550)
 			$(mainImg).css('height', 'auto')
 		}
-		if(el){
+		if (el) {
 			mainImg.src = el.src
 		}
 	}
+
+
 
 	changeImg = async (e, clickOne, clickTwo) => {
 		console.log("Hitting")
@@ -53,9 +75,14 @@ class ItemDetailPage extends Component {
 		this.setState({ currentImg: el.src })
 		this.resize('.imgSquare img', el)
 		// first recursive statement
-		if(!clickOne) this.changeImg(e, true)
+		if (!clickOne) this.changeImg(e, true)
 		// second recursive statement to ultimately break the loop
-		if(clickOne && !clickTwo) this.changeImg(e, true, true)
+		if (clickOne && !clickTwo) this.changeImg(e, true, true)
+	}
+
+	showEdit = () => {
+		let edit = !this.state.edit
+		this.setState({ edit })
 	}
 
 	/*--- Lifecycle Methods ---*/
@@ -67,12 +94,12 @@ class ItemDetailPage extends Component {
 		this.setState({ item, currentImg })
 		await this.resize('.mainImg')
 		await this.fadeDiv()
-		if(this.state.item.photos.length === 8){
-			 $(document.querySelector('.carousel')).css('justify-content', 'space-between')
-			
+		if (this.state.item.photos.length === 8) {
+			$(document.querySelector('.carousel')).css('justify-content', 'space-between')
+
 		} else {
 			let tinyImgs = document.querySelectorAll('.ItemDetailPage-center-cropped')
-			for(let i = 0; i < tinyImgs.length; i++){
+			for (let i = 0; i < tinyImgs.length; i++) {
 				console.log(tinyImgs[i])
 				tinyImgs[i].setAttribute('style', 'margin-right: .5em')
 			}
@@ -81,6 +108,9 @@ class ItemDetailPage extends Component {
 		console.log("ITEM: ", item)
 		console.log("STATE: ", this.state)
 		// await this.changeImg()
+		document.querySelector('h2').addEventListener('click', this.showEdit)
+
+
 	}
 
 	render() {
@@ -94,10 +124,42 @@ class ItemDetailPage extends Component {
 				{this.state.item ?
 					<div className='mainCard'>
 						<div className='infoHolder'>
+						<h2 id='item-edit'>Edit Item</h2>
 							{/* DEPENDING ON WHETHER THE IMAGE IS TALLER OR WIDER, USE THE HEIGHT OR WIDTH AS THE DEFAULT PROPERTY,
 BUT SET A MAXIMUM SIZE --- https://www.grailed.com/listings/16820170-iron-heart-14oz-selvedge-denim-slim-straight-cut-jeans-666s-142bb */}
-							<h3>{this.state.item.name}</h3>
-							<p>{this.state.item.description}</p>
+							{this.state.edit ?
+								<div>
+									<form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
+										<div className="form-group">
+											<label>Name</label>
+											<input
+												className="form-control"
+												name="name"
+												value={this.state.formData.name}
+												onChange={this.handleChange}
+												required
+											/>
+										</div>
+
+										<button
+											type="submit"
+											className="btn btn-xs"
+											disabled={this.state.invalidForm}
+										>
+											SAVE PUPPY
+         								 </button>&nbsp;&nbsp;
+
+									</form>
+								</div>
+								:
+
+								<div>
+
+									<h3>{this.state.item.name}</h3>
+									<p>{this.state.item.description}</p>
+									
+								</div>
+							}
 						</div>
 						<div className='imgHolder'>
 							<div className='imgSquare'>
@@ -109,13 +171,13 @@ BUT SET A MAXIMUM SIZE --- https://www.grailed.com/listings/16820170-iron-heart-
 								{/* <div> */}
 
 								{
-							
-								this.state.item.photos.map((p, i) => {
-									return <img src={p} alt="" key={i} onClick={this.changeImg} className={`ItemDetailPage-center-cropped tiny${i} ${!i ? '' : 'not-selected'}`} />
-									
-									
-								})}
-								
+
+									this.state.item.photos.map((p, i) => {
+										return <img src={p} alt="" key={i} onClick={this.changeImg} className={`ItemDetailPage-center-cropped tiny${i} ${!i ? '' : 'not-selected'}`} />
+
+
+									})}
+
 								{/* </div> */}
 							</div>
 						</div>

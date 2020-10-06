@@ -10,6 +10,7 @@ import NewItemPage from '../NewItemPage/NewItemPage';
 import userService from '../../utils/userService';
 import tokenService from '../../utils/tokenService';
 import NavBar from '../../components/NavBar/NavBar'
+import * as itemAPI from '../../services/itemService'
 
 
 
@@ -54,7 +55,7 @@ class App extends Component {
 	}
 
 	handleUpdateItem = async updatedItemData => {
-		const updatedItem = await puppyAPI.update(updatedItemData);
+		const updatedItem = await itemAPI.update(updatedItemData);
 		// Using map to replace just the puppy that was updated
 		const newItemssArray = this.state.items.map(p =>
 			p._id === updatedItem._id ? updatedItem : p
