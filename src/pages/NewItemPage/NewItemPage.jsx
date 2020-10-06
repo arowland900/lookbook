@@ -24,7 +24,8 @@ class NewItemPage extends Component {
 				description: '',
 				tags: '',
 				items: [],
-				type: 'item',
+				type: '',
+				itemOrOutfit: 'item',
 				color: '',
 			}
 		}
@@ -61,14 +62,18 @@ class NewItemPage extends Component {
 				formData = { ...this.state.formData, items: values };
 
 			} else {
-				formData = { ...this.state.formData, type: e };
+				if(e.value == 'item' || e.value == 'outfit'){
+					formData = { ...this.state.formData, itemOrOutfit: e.value };
+				} else {
+					formData = { ...this.state.formData, type: e };
+				}
 			}
 			this.setState({
 				formData,
 				// invalidForm: !this.formRef.current.checkValidity()
 			});
 		}
-		console.log(this.state.formData)
+		console.log("FORM DATA: ", this.state.formData)
 	};
 
 	multipleFileChangedHandler = (event) => {
@@ -304,7 +309,6 @@ class NewItemPage extends Component {
 			handleFiles(files)
 		}
 		console.log(this.state)
-		// document.querySelector('.resizable-input').style.display = 'none'
 
 		// END DRAG AND DROP
 	}
@@ -314,7 +318,6 @@ class NewItemPage extends Component {
 			<div className="whole-page">
 
 
-				{/* <div id="oc-alert-container"></div> */}
 				<div
 					className=" whole-card"
 					style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}
@@ -324,37 +327,36 @@ class NewItemPage extends Component {
 						<label id='photo-label' style={{ width: '200px', height: '200px' }} htmlFor="upload-photo">
 							<img id='photo-label-img' src={camera} alt="" style={{ height: '200px', width: '200px', margin: '0 auto', objectFit: 'cover' }} />
 						</label>
-						{/* <p className="card-text">Please upload the Gallery Images for your gallery</p> */}
+						
 						<input id='upload-photo' type="file" multiple onChange={this.multipleFileChangedHandler} />
-						{/* <div >
-							<p id='reset' onClick={this.refreshPage}>Reset</p>
-						</div> */}
+					
 					</div>
 					<div className="card-body">
 
 						<div className='form-div'>
 							<h3 className="card-text" style={{ color: '#555', display: 'inline' }}>Piece / Outfit: </h3>
-							<select name="type" onChange={this.handleChange}>
+							{/* <select name="type" onChange={this.handleChange}>
 								<option value="item">Piece</option>
 								<option value="outfit">Outfit</option>
-							</select>
-							{/* </div>
-						<div className='form-div'> */}
+							</select> */}
+								<Select
+									defaultValue={{ value: 'item', label: 'Piece' }}
+									options={[
+										{ value: 'item', label: 'Piece' },
+										{ value: 'outfit', label: 'Outfit' },
+									]}
+									closeMenuOnSelect={true}
+									name="itemOrOutfit"
+									classNamePrefix="select"
+									onChange={this.handleChange}
+								/>
+					
 							<p className="card-text">Name: </p>
 							<input type="text" name="name" onChange={this.handleChange} />
 
 						</div>
-						{/* 
-						<div className='form-div'>
-							<p className="card-text">Tags: </p>
-							<textarea style={{ height: '105px' }} type="text" name="tags" onChange={this.handleChange} />
-
-						</div> */}
-
-						{/* </div>
-					<div className="card-body"> */}
-						{/* <div className='form-div type'> */}
-						{this.state.formData.type === 'item'
+		
+						{this.state.formData.itemOrOutfit === 'item'
 							?
 							<div>
 
@@ -396,20 +398,7 @@ class NewItemPage extends Component {
 
 							</div>
 						}
-						{/* <p className="card-text" >Type: </p>
-							<select name="type" onChange={this.handleChange}>
-								<option value="top">Top</option>
-								<option value="bottom">Bottom</option>
-								<option value="outerwear">Outerwear</option>
-								<option value="underwear">Underwear</option>
-								<option value="footwear">Footwear</option>
-								<option value="tailoring">Tailoring</option>
-								<option value="accessory">Accessory</option>
-							</select> */}
-						{/* </div> */}
-						{/* <div className='form-div'> */}
-
-						{/* </div> */}
+		
 
 
 						<div className="mt-5 form-div">
