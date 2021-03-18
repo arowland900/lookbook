@@ -56,7 +56,7 @@ class App extends Component {
 
 	handleUpdateItem = async updatedItemData => {
 		const updatedItem = await itemAPI.update(updatedItemData);
-		// Using map to replace just the puppy that was updated
+		// Using map to replace just the item that was updated
 		const newItemssArray = this.state.items.map(p =>
 			p._id === updatedItem._id ? updatedItem : p
 		);
